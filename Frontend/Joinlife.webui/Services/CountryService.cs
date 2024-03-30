@@ -46,12 +46,12 @@ namespace Joinlife.webui.Services
             return countryMapper.CountryListToGetCountryListResponse(countries);
         }
 
-        public async Task<GetCountryResponse> GetAsync(Guid id)
+        public async Task<GetCountryByIdResponse> GetAsync(Guid id)
         {
             var country = await _repository.GetAsync(x => x.Id == id);
             if (country is null)
                 throw new Exception("Country not found");
-            return countryMapper.CountryToGetCountryResponse(country);
+            return countryMapper.CountryToGetCountryByIdResponse(country);
         }
 
         public async Task UpdateAsync(UpdateCountryInput input)

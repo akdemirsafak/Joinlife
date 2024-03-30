@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<GetCityResponse>
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+        @if (!Model.Any())
+        {
+            <div class="jumbotron text-center">No cities found.</div>
+        }
+        else
+        {
+            @foreach (var city in Model)
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"><a asp-action="Detail" asp-route-id='@city.Id'>@city.Name </a>
+                            <h6>from @city.Country.Name</h6>
+                        </h4>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

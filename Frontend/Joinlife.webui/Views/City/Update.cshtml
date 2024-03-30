@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Update";
+}
+@model UpdateCityInput
+
+
+<div class="container">
+    <h3 class="text-center">Yeni şehir</h3>
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <form method="post" asp-action="Update">
+                <div class="form-group mb-2">
+                    <label asp-for="@Model.Name"></label>
+                    <input asp-for="@Model.Name" type="text" class="form-control" />
+                </div>
+                <div class="mb-3 form-group">
+                    <select asp-for="CountryId" asp-items="ViewBag.Countries" class="form-control">
+                        <option value="">Ülke seçiniz</option>
+                    </select>
+                    <span asp-validation-for="CountryId" class="danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+
+            </form>
+            <a asp-action="Index">Listeye geri dön.</a>
+        </div>
+        <div>
+        </div>
