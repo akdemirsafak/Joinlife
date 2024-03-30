@@ -8,7 +8,7 @@ namespace Joinlife.webui.Mapping
     public partial class CountryMapper
     {
         public partial List<GetCountryResponse> CountryListToGetCountryListResponse(List<Country> countries);
-        public partial GetCountryResponse CountryToGetCountryResponse(Country country);
+        public partial GetCountryByIdResponse CountryToGetCountryByIdResponse(Country country);
         public partial Country CreateCountryInputToCountry(CreateCountryInput country);
         public partial Country UpdateCountryInputToCountry(UpdateCountryInput country);
     }
