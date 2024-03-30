@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<GetOrganizerResponse>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                <a asp-action="Create" class="btn btn-primary">Create New</a>
+            </div>
+            @if (!Model.Any())
+            {
+                <div class="jumbotron text-center">No organizer found.</div>
+            }
+            else
+            {
+                @foreach (var organizer in Model)
+                {
+                    <div class="card m-2">
+                        <div class="card-header">
+                            <h4 class="card-title"><a asp-action="Detail" asp-route-id='@organizer.Id'>@organizer.Name </a></h4>
+                            <p>@organizer.Description</p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>

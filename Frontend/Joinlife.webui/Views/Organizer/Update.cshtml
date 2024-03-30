@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Update";
+}
+
+@model UpdateOrganizerInput
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="card">
+                <div class="card-header">
+                    Organizatörü güncelle
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="Update">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description"></label>
+                            <textarea asp-for="Description" class="form-control">
+                            </textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Kaydet</button>
+
+                    </form>
+                </div>
+                <a asp-action="Detail" asp-route-id="@Model.Id">Ayrıntılara geri dön.</a>
+
+            </div>
+        </div>
+    </div>
+</div>
