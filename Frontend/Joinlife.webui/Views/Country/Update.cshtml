@@ -1,0 +1,31 @@
+@{
+    ViewData["Title"] = "Update";
+}
+@model UpdateCountryInput
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="card">
+                <div class="card-header">
+                    Ürünü güncelle
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-action="Update">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Kaydet</button>
+
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

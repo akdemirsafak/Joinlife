@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<GetCountryResponse>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        @if (!Model.Any())
+        {
+            <div class="jumbotron text-center">No countries found.</div>
+        }
+        else
+        {
+            @foreach (var country in Model)
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"><a asp-action="Detail" asp-route-id='@country.Id'>@country.Name </a></h4>
+
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

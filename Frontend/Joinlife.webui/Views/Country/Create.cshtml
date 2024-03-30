@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Create";
+}
+@model CreateCountryInput
+
+
+<div class="container">
+    <h3 class="text-center">Yeni kategori</h3>
+    <div class="row">
+
+        <form method="post" asp-action="Create" class="col-6 offset-3">
+            <div class="form-group mb-2">
+                <label>Country Name</label>
+                <input asp-for="@Model.Name" type="text" class="form-control" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Kaydet</button>
+
+        </form>
+
+    </div>
+
+</div>

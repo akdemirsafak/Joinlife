@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Detail";
+}
+@model GetCountryResponse
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="card">
+
+                <div class="card-body">
+                    <h3>@Model.Name</h3>
+                </div>
+                <div class="card-footer">
+                    <button>Güncelle</button>
+                    <button>Sil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
