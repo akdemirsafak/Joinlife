@@ -135,3 +135,4 @@ C:\Users\akdem\Desktop\Projects\Joinlife\Frontend\Joinlife.webui\obj\Debug\net8.
 C:\Users\akdem\Desktop\Projects\Joinlife\Frontend\Joinlife.webui\obj\Debug\net8.0\Joinlife.webui.genruntimeconfig.cache
 C:\Users\akdem\Desktop\Projects\Joinlife\Frontend\Joinlife.webui\obj\Debug\net8.0\ref\Joinlife.webui.dll
 C:\Users\akdem\Desktop\Projects\Joinlife\Frontend\Joinlife.webui\obj\Debug\net8.0\Joinlife.webui.sourcelink.json
+C:\Users\akdem\Desktop\Projects\Joinlife\Frontend\Joinlife.webui\bin\Debug\net8.0\Riok.Mapperly.Abstractions.dll

@@ -49,13 +49,13 @@ namespace Joinlife.webui.Controllers
         public async Task<IActionResult> Update(UpdateCountryInput input)
         {
             await _countryService.UpdateAsync(input);
-            return Redirect(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
-        [HttpDelete]
-        public async Task<IActionResult> DeleteAsync(Guid id)
+        [HttpPost]
+        public async Task<IActionResult> Delete(Guid id)
         {
             await _countryService.DeleteAsync(id);
-            return Redirect(nameof(Index));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

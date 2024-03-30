@@ -9,7 +9,8 @@
       "Joinlife.webui/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.3",
-          "Microsoft.EntityFrameworkCore.Tools": "8.0.3"
+          "Microsoft.EntityFrameworkCore.Tools": "8.0.3",
+          "Riok.Mapperly": "3.4.0"
         },
         "runtime": {
           "Joinlife.webui.dll": {}
@@ -602,6 +603,14 @@
           }
         }
       },
+      "Riok.Mapperly/3.4.0": {
+        "runtime": {
+          "lib/netstandard2.0/Riok.Mapperly.Abstractions.dll": {
+            "assemblyVersion": "3.4.0.0",
+            "fileVersion": "3.4.0.0"
+          }
+        }
+      },
       "System.CodeDom/4.4.0": {
         "runtime": {
           "lib/netstandard2.0/System.CodeDom.dll": {
@@ -1157,6 +1166,13 @@
       "sha512": "sha512-KZYeKBET/2Z0gY1WlTAK7+RHTl7GSbtvTLDXEZZojUdAPqpQNDL6tHv7VUpqfX5VEOh+uRGKaZXkuD253nEOBQ==",
       "path": "mono.texttemplating/2.2.1",
       "hashPath": "mono.texttemplating.2.2.1.nupkg.sha512"
+    },
+    "Riok.Mapperly/3.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bTxBEQ0+2x816IL78Fv0B/KkaGRtzfisit9dfWTfa7jjjwMMzpMW9A+V/hyxqHdJtYvtDL6dUNMLJige4zxJvw==",
+      "path": "riok.mapperly/3.4.0",
+      "hashPath": "riok.mapperly.3.4.0.nupkg.sha512"
     },
     "System.CodeDom/4.4.0": {
       "type": "package",
