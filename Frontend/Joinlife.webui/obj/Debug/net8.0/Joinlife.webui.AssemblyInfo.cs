@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Joinlife.webui")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+aaf06f773fb86aab6882f21ea4bb3cb611ef683b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2e062ff80d9062900f6b20b17eb3814542cf59af")]
 [assembly: System.Reflection.AssemblyProductAttribute("Joinlife.webui")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Joinlife.webui")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

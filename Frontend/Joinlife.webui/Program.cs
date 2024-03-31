@@ -2,6 +2,7 @@ using Joinlife.webui.Contexts;
 using Joinlife.webui.Core;
 using Joinlife.webui.Core.Repositories;
 using Joinlife.webui.Core.Services;
+using Joinlife.webui.Entities;
 using Joinlife.webui.Repositories;
 using Joinlife.webui.Services;
 using Joinlife.webui.UnitOfWorks;
@@ -20,6 +21,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IOrganizerService, OrganizerService>();
+builder.Services.AddScoped<IVenueService, VenueService>();
 
 
 var app = builder.Build();
