@@ -13,6 +13,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<City>().Navigation(x => x.Country).AutoInclude();
         modelBuilder.Entity<Country>().Navigation(x => x.Cities).AutoInclude();
 
+        modelBuilder.Entity<Venue>().Navigation(x => x.City).AutoInclude();
 
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(Program).Assembly);
         base.OnModelCreating(modelBuilder);

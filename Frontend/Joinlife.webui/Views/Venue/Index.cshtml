@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<GetVenueResponse>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <a asp-action="Create" class="btn btn-primary">Create New</a>
+        </div>
+        @if (!Model.Any())
+        {
+            <div class="jumbotron text-center">No venues found.</div>
+        }
+        else
+        {
+            @foreach (var venue in Model)
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"><a asp-action="Detail" asp-route-id='@venue.Id'>@venue.Name </a></h4>
+                        <p>@venue.Line</p>
+                        <h6>@venue.CityName</h6>
+
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
