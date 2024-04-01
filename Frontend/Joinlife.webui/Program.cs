@@ -22,6 +22,7 @@ builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IOrganizerService, OrganizerService>();
 builder.Services.AddScoped<IVenueService, VenueService>();
+builder.Services.AddScoped<IEventService, EventService>();
 
 
 var app = builder.Build();
