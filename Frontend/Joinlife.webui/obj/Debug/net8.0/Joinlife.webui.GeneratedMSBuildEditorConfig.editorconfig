@@ -50,6 +50,22 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ291bnRyeVxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/akdem/Desktop/Projects/Joinlife/Frontend/Joinlife.webui/Views/Event/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/akdem/Desktop/Projects/Joinlife/Frontend/Joinlife.webui/Views/Event/Detail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcRGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/akdem/Desktop/Projects/Joinlife/Frontend/Joinlife.webui/Views/Event/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/akdem/Desktop/Projects/Joinlife/Frontend/Joinlife.webui/Views/Event/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXZlbnRcVXBkYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/akdem/Desktop/Projects/Joinlife/Frontend/Joinlife.webui/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

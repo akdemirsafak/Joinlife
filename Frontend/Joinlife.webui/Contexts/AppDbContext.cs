@@ -15,6 +15,9 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Venue>().Navigation(x => x.City).AutoInclude();
 
+        modelBuilder.Entity<Event>().Navigation(x => x.Organizer).AutoInclude();
+        modelBuilder.Entity<Event>().Navigation(x => x.Venue).AutoInclude();
+
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(Program).Assembly);
         base.OnModelCreating(modelBuilder);
     }

@@ -1,0 +1,43 @@
+@{
+    ViewData["Title"] = "Update";
+}
+
+@model UpdateEventInput
+
+<div class="container">
+    <h3 class="text-center">Yeni Organizasyon</h3>
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <form method="post" asp-action="Update">
+                <div class="form-group mb-2">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" type="text" class="form-control" />
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" type="text" class="form-control"></textarea>
+                </div>
+                <div class="mb-3 form-group">
+                    <select asp-for="OrganizerId" asp-items="ViewBag.Organizers" class="form-control">
+                        <option value="">Organizasyonu düzenleyeni seçiniz</option>
+                    </select>
+                    <span asp-validation-for="OrganizerId" class="danger"></span>
+                </div>
+                <div class="mb-3 form-group">
+                    <select asp-for="VenueId" asp-items="ViewBag.Venues" class="form-control">
+                        <option value="">Mekan seçiniz</option>
+                    </select>
+                    <span asp-validation-for="VenueId" class="danger"></span>
+                </div>
+                <div class="mb-3 form-group">
+                    <select asp-for="EventTypeId" asp-items="ViewBag.EventTypes" class="form-control">
+                        <option value="">Etkinlik türünü seçiniz</option>
+                    </select>
+                    <span asp-validation-for="EventTypeId" class="danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Kaydet</button>
+            </form>
+            <a asp-action="Index">Listeye geri dön.</a>
+        </div>
+        <div>
+        </div>

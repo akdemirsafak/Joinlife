@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Detail";
+}
+@model GetEventByIdResponse
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3">
+            <div class="card">
+                <div class="card-header h5 text-center">
+                    @Model.Name etkinliği bir @Model.EventType 'dır ve @Model.Organizer.Name tarafından düzenlenir.
+                </div>
+                <div class="card-body">
+                    <p>Event ayrıntıları : @Model.Description</p>
+                    <p>Konum : @Model.Venue.Name , @Model.Venue.City.Name</p>
+                </div>
+
+                <div class="card-footer btn-group">
+                    <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-warning">Güncelle</a>
+                    <form method="post">
+                        <button asp-action="Delete" asp-route-id="@Model.Id" type="submit"
+                            class="btn btn-outline-danger">
+                            Sil
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <a asp-action="Index">Listeye geri dön.</a>
+        </div>
+    </div>
+</div>
