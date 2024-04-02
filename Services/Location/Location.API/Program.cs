@@ -31,10 +31,10 @@ string mssqlConnectionString = builder.Configuration.GetConnectionString("Defaul
 builder.Services.AddDbContext<LocationDbContext>(opt =>
 {
     opt.UseSqlServer(mssqlConnectionString,
-    option =>
-    {
-        option.MigrationsAssembly(Assembly.GetAssembly(typeof(LocationDbContext))!.GetName().Name);
-    });
+        option =>
+        {
+            option.MigrationsAssembly(Assembly.GetAssembly(typeof(LocationDbContext))!.GetName().Name);
+        });
 });
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -43,6 +43,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<ICountryService, CountryService>();
+builder.Services.AddScoped<IVenueService, VenueService>();
 
 builder.Services.AddValidatorsFromAssembly(typeof(ApplicationAssemblyReference).Assembly);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));

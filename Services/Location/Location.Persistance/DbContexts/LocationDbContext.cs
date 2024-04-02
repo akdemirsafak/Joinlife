@@ -17,6 +17,9 @@ public sealed class LocationDbContext : DbContext
         modelBuilder.Entity<City>().Navigation(x => x.Country).AutoInclude();
         modelBuilder.Entity<Country>().Navigation(x => x.Cities).AutoInclude();
 
+        modelBuilder.Entity<City>().Navigation(x => x.Venues).AutoInclude();
+        modelBuilder.Entity<Venue>().Navigation(x => x.City).AutoInclude();
+
         base.OnModelCreating(modelBuilder);
     }
 }
