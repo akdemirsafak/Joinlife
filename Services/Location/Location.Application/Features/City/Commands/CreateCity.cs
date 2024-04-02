@@ -3,15 +3,16 @@ using Location.Application.Services;
 using Location.Domain.Models.Request.Cities;
 using Location.Domain.Models.Response.Cities;
 using MediatR;
+using SharedLib.Dtos;
 
 namespace Location.Application.Features.City.Commands;
 
 public static class CreateCity
 {
 
-    public record Command(CreateCityRequest Model) : IRequest<CreatedCityResponse>;
+    public record Command(CreateCityRequest Model) : IRequest<AppResponse<CreatedCityResponse>>;
 
-    public class CommandHandler : IRequestHandler<Command, CreatedCityResponse>
+    public class CommandHandler : IRequestHandler<Command, AppResponse<CreatedCityResponse>>
     {
 
         private readonly ICityService _cityService;
@@ -21,9 +22,10 @@ public static class CreateCity
             _cityService = cityService;
         }
 
-        public async Task<CreatedCityResponse> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<AppResponse<CreatedCityResponse>> Handle(Command request, CancellationToken cancellationToken)
         {
-            return await _cityService.CreateAsync(request.Model);
+            var createdCity = await _cityService.CreateAsync(request.Model);
+            return AppResponse<CreatedCityResponse>.Success(createdCity, 201);
         }
     }
     public sealed class CommandValidator : AbstractValidator<Command>
