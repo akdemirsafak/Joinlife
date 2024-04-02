@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Location.Persistance", "Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Location.Presentation", "Services\Location\Location.Presentation\Location.Presentation.csproj", "{4FD82A83-351B-4248-9C72-3BDED1B1CEDC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedLib", "Shared\SharedLib\SharedLib.csproj", "{ED83852D-36EF-4DF6-893A-A80BEA2F9E29}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{4FD82A83-351B-4248-9C72-3BDED1B1CEDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FD82A83-351B-4248-9C72-3BDED1B1CEDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FD82A83-351B-4248-9C72-3BDED1B1CEDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED83852D-36EF-4DF6-893A-A80BEA2F9E29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED83852D-36EF-4DF6-893A-A80BEA2F9E29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED83852D-36EF-4DF6-893A-A80BEA2F9E29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED83852D-36EF-4DF6-893A-A80BEA2F9E29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
