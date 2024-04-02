@@ -1,21 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SharedLib.Dtos;
 namespace SharedLib.BaseController
 {
-    public class CustomBaseController
+    [Route("[controller]")]
+    [ApiController]
+    public class CustomBaseController : ControllerBase
     {
-        [Route("[controller]")]
-        [ApiController]
-        public class CustomBaseController : ControllerBase
+        [NonAction]
+        public IActionResult CreateActionResult<T>(AppResponse<T> response)
         {
-            [NonAction]
-            public IActionResult CreateActionResult<T>(Response<T> response)
+            return new ObjectResult(response)
             {
-                return new ObjectResult(response)
-                {
-                    StatusCode = response.StatusCode,
+                StatusCode = response.StatusCode,
 
-                };
-            }
+            };
         }
     }
 }

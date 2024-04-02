@@ -1,14 +1,15 @@
 ﻿using Location.Application.Services;
 using Location.Domain.Models.Response.Countries;
 using MediatR;
+using SharedLib.Dtos;
 
 namespace Location.Application.Features.Country.Queries;
 
 public static class GetCountries
 {
-    public class Query : IRequest<List<GetCountryResponse>>;
+    public class Query : IRequest<AppResponse<List<GetCountryResponse>>>;
 
-    public class QueryHandler : IRequestHandler<Query, List<GetCountryResponse>>
+    public class QueryHandler : IRequestHandler<Query, AppResponse<List<GetCountryResponse>>>
     {
         private readonly ICountryService _countryService;
 
@@ -17,9 +18,9 @@ public static class GetCountries
             _countryService = countryService;
         }
 
-        public async Task<List<GetCountryResponse>> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<AppResponse<List<GetCountryResponse>>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return await _countryService.GetAllAsync();
+            return AppResponse<List<GetCountryResponse>>.Success(await _countryService.GetAllAsync(), 200);
         }
     }
 }

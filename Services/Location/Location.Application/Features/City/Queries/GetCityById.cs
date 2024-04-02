@@ -2,13 +2,14 @@
 using Location.Application.Services;
 using Location.Domain.Models.Response.Cities;
 using MediatR;
+using SharedLib.Dtos;
 
 namespace Location.Application.Features.City.Queries;
 
 public static class GetCityById
 {
-    public record Query(Guid Id) : IRequest<GetCityResponse>;
-    public class QueryHandler : IRequestHandler<Query, GetCityResponse>
+    public record Query(Guid Id) : IRequest<AppResponse<GetCityResponse>>;
+    public class QueryHandler : IRequestHandler<Query, AppResponse<GetCityResponse>>
     {
         private readonly ICityService _cityService;
 
@@ -17,9 +18,9 @@ public static class GetCityById
             _cityService = cityService;
         }
 
-        public async Task<GetCityResponse> Handle(Query request, CancellationToken cancellationToken)
+        public async Task<AppResponse<GetCityResponse>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return await _cityService.GetByIdAsync(request.Id);
+            return AppResponse<GetCityResponse>.Success(await _cityService.GetByIdAsync(request.Id),200);
         }
     }
     public sealed class QueryValidator : AbstractValidator<Query>

@@ -3,14 +3,15 @@ using Location.Application.Services;
 using Location.Domain.Models.Request.Countries;
 using Location.Domain.Models.Response.Countries;
 using MediatR;
+using SharedLib.Dtos;
 
 namespace Location.Application.Features.Country.Commands;
 
 public static class CreateCountry
 {
-    public record Command(CreateCountryRequest Model) : IRequest<CreatedCountryResponse>;
+    public record Command(CreateCountryRequest Model) : IRequest<AppResponse<CreatedCountryResponse>>;
 
-    public class CommandHandler : IRequestHandler<Command, CreatedCountryResponse>
+    public class CommandHandler : IRequestHandler<Command, AppResponse<CreatedCountryResponse>>
     {
         private readonly ICountryService _countryService;
 
@@ -19,9 +20,9 @@ public static class CreateCountry
             _countryService = countryService;
         }
 
-        public async Task<CreatedCountryResponse> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<AppResponse<CreatedCountryResponse>> Handle(Command request, CancellationToken cancellationToken)
         {
-            return await _countryService.CreateAsync(request.Model);
+            return AppResponse<CreatedCountryResponse>.Success(await _countryService.CreateAsync(request.Model),201);
         }
     }
     public sealed class CommandValidator : AbstractValidator<Command>

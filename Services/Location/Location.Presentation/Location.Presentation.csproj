@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\SharedLib\SharedLib.csproj" />
     <ProjectReference Include="..\Location.Application\Location.Application.csproj" />
   </ItemGroup>
 
