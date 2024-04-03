@@ -10,8 +10,6 @@ public class CreatedEventResponse
     public int StatuId { get; set; }
     public DateTime StartDateTime { get; set; }
     public DateTime EndDateTime { get; set; }
-    public decimal Price { get; set; }
-    public int SellableTicketAmount { get; set; }
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
 }
