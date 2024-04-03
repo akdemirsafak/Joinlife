@@ -6,6 +6,4 @@ public record UpdateEventRequest(
     int StatuId,
     DateTime StartDateTime,
     DateTime EndDateTime,
-    decimal Price,
-    int SellableTicketAmount,
     string? Description = null);

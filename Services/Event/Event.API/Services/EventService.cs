@@ -53,8 +53,6 @@ public class EventService : IEventService
         entity.VenueId = request.VenueId;
         entity.StartDateTime = request.StartDateTime;
         entity.EndDateTime = request.EndDateTime;
-        entity.SellableTicketAmount = request.SellableTicketAmount;
-        entity.Price = request.Price;
         entity.Statu = (EventStatusEnum)request.StatuId;
         entity.Type = (EventTypeEnum)request.EventTypeId;
         entity.UpdatedAt = DateTime.Now;

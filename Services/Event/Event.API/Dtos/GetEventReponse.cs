@@ -10,9 +10,6 @@ namespace Event.API.Dtos
         public Guid VenueId { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
-        public int SellableTicketAmount { get; set; }
-        public int SelledTicketAmount { get; set; }
-        public decimal Price { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public string Statu { get; set; }

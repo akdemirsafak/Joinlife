@@ -29,9 +29,6 @@ namespace Event.API.Validations
 
             RuleFor(x => x.EndDateTime)
                 .GreaterThan(x => x.StartDateTime);
-
-            RuleFor(x => x.SellableTicketAmount)
-                .GreaterThan(0);
         }
     }
 }
