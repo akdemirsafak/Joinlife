@@ -2,7 +2,7 @@
 using SharedLib.Dtos;
 namespace SharedLib.BaseController
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CustomBaseController : ControllerBase
     {

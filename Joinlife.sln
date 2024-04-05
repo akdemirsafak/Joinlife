@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharedLib", "Shared\SharedL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Event.API", "Services\Event\Event.API\Event.API.csproj", "{A4F3C6C5-DA05-40CC-8AC1-7091F97565BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticket.API", "Services\Ticket\Ticket.API\Ticket.API.csproj", "{97F7F80A-7935-41CF-8D4F-60EE388EEFE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ticket.API", "Services\Ticket\Ticket.API\Ticket.API.csproj", "{97F7F80A-7935-41CF-8D4F-60EE388EEFE3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.API", "Services\Order\Order.API\Order.API.csproj", "{3DB96641-4E25-4177-9F75-88342571ED59}"
 EndProject
@@ -28,6 +28,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Service", "Services\Order\Order.Service\Order.Service.csproj", "{811BE4EC-DB6C-4AB2-B8A2-21B83F4C233F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order.Repository", "Services\Order\Order.Repository\Order.Repository.csproj", "{96357FA8-4B91-4C12-9E56-6AE574731B65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotGateway", "Gateways\OcelotGateway\OcelotGateway.csproj", "{8982EF28-B644-4069-8D7D-C472F4449841}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{96357FA8-4B91-4C12-9E56-6AE574731B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96357FA8-4B91-4C12-9E56-6AE574731B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96357FA8-4B91-4C12-9E56-6AE574731B65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8982EF28-B644-4069-8D7D-C472F4449841}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8982EF28-B644-4069-8D7D-C472F4449841}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8982EF28-B644-4069-8D7D-C472F4449841}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8982EF28-B644-4069-8D7D-C472F4449841}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
