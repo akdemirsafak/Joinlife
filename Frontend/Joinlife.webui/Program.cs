@@ -2,9 +2,10 @@ using Joinlife.webui.Contexts;
 using Joinlife.webui.Core;
 using Joinlife.webui.Core.Repositories;
 using Joinlife.webui.Core.Services;
-using Joinlife.webui.Entities;
+using Joinlife.webui.Extensions;
 using Joinlife.webui.Repositories;
 using Joinlife.webui.Services;
+using Joinlife.webui.Settings;
 using Joinlife.webui.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,13 @@ builder.Services.AddScoped<IOrganizerService, OrganizerService>();
 builder.Services.AddScoped<IVenueService, VenueService>();
 builder.Services.AddScoped<IEventService, EventService>();
 
+
+builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
+
+
+builder.Services.AddHttpClientServices(builder.Configuration);
+
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

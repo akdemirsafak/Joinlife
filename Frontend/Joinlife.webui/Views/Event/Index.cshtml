@@ -24,8 +24,8 @@
                             <a asp-action="Detail" asp-route-id="@organization.Id">
                                 @organization.Name</a>
                             <h6>Event Türü @organization.EventType</h6>
-                            <h6>Organizasyon Firması @organization.Organizer.Name</h6>
-                            <h6>Yer @organization.Venue.Name</h6>
+
+                            <h6>Yer @organization.VenueId</h6>
                             <p>Açıklama : @organization.Description</p>
                         </h4>
                     </div>

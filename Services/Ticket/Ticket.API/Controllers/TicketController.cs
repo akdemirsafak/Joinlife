@@ -1,5 +1,4 @@
-﻿using Azure.Core;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SharedLib.BaseController;
 using Ticket.API.Models;
 using Ticket.API.Service;
