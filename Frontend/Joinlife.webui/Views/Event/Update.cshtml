@@ -18,12 +18,6 @@
                     <textarea asp-for="Description" type="text" class="form-control"></textarea>
                 </div>
                 <div class="mb-3 form-group">
-                    <select asp-for="OrganizerId" asp-items="ViewBag.Organizers" class="form-control">
-                        <option value="">Organizasyonu düzenleyeni seçiniz</option>
-                    </select>
-                    <span asp-validation-for="OrganizerId" class="danger"></span>
-                </div>
-                <div class="mb-3 form-group">
                     <select asp-for="VenueId" asp-items="ViewBag.Venues" class="form-control">
                         <option value="">Mekan seçiniz</option>
                     </select>
