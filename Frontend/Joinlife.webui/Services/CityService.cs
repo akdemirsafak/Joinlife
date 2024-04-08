@@ -7,6 +7,7 @@ namespace Joinlife.webui.Services;
 public class CityService : ICityService
 {
     private readonly HttpClient _httpClient;
+    //Service Requests
 
     public CityService(HttpClient httpClient)
     {

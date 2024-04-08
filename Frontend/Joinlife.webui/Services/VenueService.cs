@@ -7,7 +7,7 @@ namespace Joinlife.webui.Services;
 public class VenueService : IVenueService
 {
     private readonly HttpClient _httpClient;
-
+    //Service Requests
     public VenueService(HttpClient httpClient)
     {
         _httpClient = httpClient;

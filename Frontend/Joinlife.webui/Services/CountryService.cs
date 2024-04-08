@@ -7,7 +7,7 @@ namespace Joinlife.webui.Services;
 public class CountryService : ICountryService
 {
     private readonly HttpClient _httpClient;
-
+    //Service Requests
     public CountryService(HttpClient httpClient)
     {
         _httpClient = httpClient;

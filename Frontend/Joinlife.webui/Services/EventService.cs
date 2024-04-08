@@ -8,7 +8,7 @@ public sealed class EventService : IEventService
 {
 
     private readonly HttpClient _httpClient;
-
+    //Service Requests
     public EventService(HttpClient httpClient)
     {
         _httpClient = httpClient;
