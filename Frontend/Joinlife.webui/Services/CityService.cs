@@ -1,5 +1,6 @@
 ﻿using Joinlife.webui.Core.Services;
 using Joinlife.webui.Models.City;
+using SharedLib.Dtos;
 
 namespace Joinlife.webui.Services;
 
