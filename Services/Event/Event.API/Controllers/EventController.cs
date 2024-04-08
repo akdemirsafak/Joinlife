@@ -1,5 +1,5 @@
-﻿using Event.API.Dtos;
-using Event.API.Services;
+﻿using Event.API.Core;
+using Event.API.Dtos.Events;
 using Microsoft.AspNetCore.Mvc;
 using SharedLib.BaseController;
 

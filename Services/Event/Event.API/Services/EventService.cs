@@ -1,27 +1,28 @@
 using AutoMapper;
-using Event.API.Dtos;
+using Event.API.Core;
+using Event.API.Dtos.Events;
 using Event.API.Entities;
-using Event.API.Repositories;
 using SharedLib.Dtos;
 
 namespace Event.API.Services;
 public class EventService : IEventService
 {
-    private readonly IEventRepository _eventRepository;
+    private readonly IGenericRepository<Eventy> _eventRepository;
     private readonly IMapper _mapper;
 
-    public EventService(IEventRepository eventRepository, IMapper mapper)
+    public EventService(IGenericRepository<Eventy> eventRepository, IMapper mapper)
     {
         _eventRepository = eventRepository;
         _mapper = mapper;
     }
 
+
     public async Task<AppResponse<CreatedEventResponse>> CreateAsync(CreateEventRequest request)
     {
         var entity = _mapper.Map<Eventy>(request);
         entity.CreatedAt = DateTime.Now;
-        await _eventRepository.CreateAsync(entity);
-        return AppResponse<CreatedEventResponse>.Success(_mapper.Map<CreatedEventResponse>(entity), 201);
+        var response= await _eventRepository.CreateAsync(entity);
+        return AppResponse<CreatedEventResponse>.Success(_mapper.Map<CreatedEventResponse>(response), 201);
     }
 
     public async Task<AppResponse<NoContentResponse>> DeleteAsync(Guid id)

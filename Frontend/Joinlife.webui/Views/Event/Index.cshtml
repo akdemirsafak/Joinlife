@@ -25,7 +25,14 @@
                                 @organization.Name</a>
                             <h6>Event Türü @organization.EventType</h6>
 
-                            <h6>Yer @organization.VenueId</h6>
+                            <h6>Yer : @foreach(var venue in ViewBag.Venues)
+                                {
+                                    if (venue.Id == organization.VenueId)
+                                    {
+                                        @venue.Name
+                                    }
+                                }
+                            </h6>
                             <p>Açıklama : @organization.Description</p>
                         </h4>
                     </div>

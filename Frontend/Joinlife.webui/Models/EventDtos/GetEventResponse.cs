@@ -1,5 +1,3 @@
-using Joinlife.webui.Entities;
-
 namespace Joinlife.webui.Models.EventDtos
 {
     public sealed class GetEventResponse

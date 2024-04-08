@@ -1,5 +1,5 @@
 using AutoMapper;
-using Event.API.Dtos;
+using Event.API.Dtos.Events;
 using Event.API.Entities;
 
 namespace Event.API.Mapping

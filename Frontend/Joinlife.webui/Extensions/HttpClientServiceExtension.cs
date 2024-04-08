@@ -6,7 +6,7 @@ namespace Joinlife.webui.Extensions;
 
 public static class HttpClientServiceExtension
 {
-    public static void AddHttpClientServices(this IServiceCollection services,IConfiguration configuration)
+    public static void AddHttpClientServices(this IServiceCollection services, IConfiguration configuration)
     {
         var serviceApiSettings = configuration.GetSection("ServiceApiSettings").Get<ServiceApiSettings>();
         services.AddHttpClient<ICountryService, CountryService>(opt =>
@@ -36,7 +36,7 @@ public static class HttpClientServiceExtension
         });
         services.AddHttpClient<ITicketService, TicketService>(opt =>
         {
-            opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}/{serviceApiSettings.Location.Path}");
+            opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}/{serviceApiSettings.Event.Path}");
         });
         services.AddHttpClient<IOrderService, OrderService>(opt =>
         {

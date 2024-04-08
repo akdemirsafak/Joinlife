@@ -46,7 +46,7 @@ public class VenueService : IVenueService
     {
         var clientResult= await _httpClient.GetAsync($"venue/{id}");
         if (!clientResult.IsSuccessStatusCode)
-        { 
+        {
             throw new Exception("Could not get venue");
         }
         var result = await clientResult.Content.ReadFromJsonAsync<AppResponse<GetVenueByIdResponse>>();

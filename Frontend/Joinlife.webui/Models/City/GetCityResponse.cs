@@ -1,9 +1,10 @@
-namespace Joinlife.webui.Models.City
+using Joinlife.webui.Models.Country;
+
+namespace Joinlife.webui.Models.City;
+
+public class GetCityResponse
 {
-    public class GetCityResponse
-    {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public Entities.Country Country { get; set; }
-    }
+    public Guid Id { get; set; }
+    public string Name { get; set; }
+    public CountryViewModel Country { get; set; }
 }

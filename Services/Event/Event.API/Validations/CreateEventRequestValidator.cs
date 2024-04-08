@@ -1,5 +1,4 @@
-using System.Data;
-using Event.API.Dtos;
+using Event.API.Dtos.Events;
 using FluentValidation;
 
 namespace Event.API.Validations

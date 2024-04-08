@@ -12,11 +12,13 @@ public sealed class Eventy
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public EventStatusEnum Statu { get; set; }
+    public List<Tickety> Tickets { get; set; }
 
 
     public Eventy()
     {
         Id = Guid.NewGuid();
+        Tickets = new List<Tickety>();
     }
 }
 public enum EventTypeEnum

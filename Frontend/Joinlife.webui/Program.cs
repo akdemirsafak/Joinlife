@@ -1,29 +1,18 @@
-using Joinlife.webui.Contexts;
-using Joinlife.webui.Core;
-using Joinlife.webui.Core.Repositories;
 using Joinlife.webui.Core.Services;
 using Joinlife.webui.Extensions;
-using Joinlife.webui.Repositories;
 using Joinlife.webui.Services;
 using Joinlife.webui.Settings;
-using Joinlife.webui.UnitOfWorks;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
 builder.Services.AddScoped<ICountryService, CountryService>();
 builder.Services.AddScoped<ICityService, CityService>();
-builder.Services.AddScoped<IOrganizerService, OrganizerService>();
 builder.Services.AddScoped<IVenueService, VenueService>();
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<ITicketService, TicketService>();
 
 
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));

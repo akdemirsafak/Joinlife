@@ -1,5 +1,5 @@
+using Joinlife.webui.Common;
 using Joinlife.webui.Core.Services;
-using Joinlife.webui.Entities;
 using Joinlife.webui.Models.EventDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -20,6 +20,7 @@ public class EventController : Controller
 
     public async Task<IActionResult> Index()
     {
+        ViewBag.Venues = await _venueService.GetAllAsync();
         return View(await _eventService.GetAllAsync());
     }
 
@@ -39,7 +40,16 @@ public class EventController : Controller
                 Text = e.ToString()// Requires System.ComponentModel.DataAnnotations namespace
             })
             .ToList();
+        var eventStatus = Enum.GetValues(typeof(EventStatusEnum))
+            .Cast<EventStatusEnum>()
+            .Select(e => new SelectListItem
+            {
+                Value = ((int)e).ToString(),
+                Text = e.ToString()// Requires System.ComponentModel.DataAnnotations namespace
+            })
+            .ToList();
         ViewBag.EventTypes = eventTypes;
+        ViewBag.EventStatus = eventStatus;
 
         return View();
     }
@@ -58,7 +68,7 @@ public class EventController : Controller
     public async Task<IActionResult> Update(Guid id)
     {
         var organization = await _eventService.GetAsync(id);
-            var organizationUpdateInputModel = new UpdateEventInput(id, organization.Name, organization.Description, organization.EventTypeId, organization.Organizer.Id, organization.Venue.Id);
+        var organizationUpdateInputModel = new UpdateEventInput(id, organization.Name, organization.Description, organization.EventTypeId, organization.VenueId,organization.StartDateTime,organization.EndDateTime,organization.StatuId);
         ViewBag.Venues = new SelectList(await _venueService.GetAllAsync(), "Id", "Name");
         // ! ViewBag'ler yerine Tempdata'lar kullanalım ki hata çıkması durumunda sayfadaki selectlist'ler gelsin.
         var eventTypes = Enum.GetValues(typeof(EventTypeEnum))
@@ -70,7 +80,16 @@ public class EventController : Controller
                 Selected = (int)e == organization.EventTypeId
             })
             .ToList();
+        var eventStatus = Enum.GetValues(typeof(EventStatusEnum))
+            .Cast<EventStatusEnum>()
+            .Select(e => new SelectListItem
+            {
+                Value = ((int)e).ToString(),
+                Text = e.ToString()// Requires System.ComponentModel.DataAnnotations namespace
+            })
+            .ToList();
         ViewBag.EventTypes = eventTypes;
+        ViewBag.EventStatus = eventStatus;
         return View(organizationUpdateInputModel);
     }
     [HttpPost]

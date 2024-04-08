@@ -15,7 +15,7 @@ public class CityService : ICityService
 
     public async Task CreateAsync(CreateCityInput input)
     {
-      var clientResult= await _httpClient.PostAsJsonAsync($"city", input);
+        var clientResult= await _httpClient.PostAsJsonAsync($"city", input);
         if (!clientResult.IsSuccessStatusCode)
         {
             throw new Exception("create city failed");
@@ -25,7 +25,7 @@ public class CityService : ICityService
 
     public async Task DeleteAsync(Guid id)
     {
-      var request= await _httpClient.DeleteAsync($"city/{id}");
+        var request= await _httpClient.DeleteAsync($"city/{id}");
     }
 
     public async Task<List<GetCityResponse>> GetAllAsync()

@@ -60,6 +60,44 @@ namespace Event.API.Migrations
 
                     b.ToTable("Events");
                 });
+
+            modelBuilder.Entity("Event.API.Entities.Tickety", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EventId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("EventyId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventyId");
+
+                    b.ToTable("Tickets");
+                });
+
+            modelBuilder.Entity("Event.API.Entities.Tickety", b =>
+                {
+                    b.HasOne("Event.API.Entities.Eventy", null)
+                        .WithMany("Tickets")
+                        .HasForeignKey("EventyId");
+                });
+
+            modelBuilder.Entity("Event.API.Entities.Eventy", b =>
+                {
+                    b.Navigation("Tickets");
+                });
 #pragma warning restore 612, 618
         }
     }

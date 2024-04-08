@@ -1,7 +1,6 @@
 using Joinlife.webui.Core.Services;
 using Joinlife.webui.Models.EventDtos;
 using SharedLib.Dtos;
-using System.Text.Json;
 
 namespace Joinlife.webui.Services;
 

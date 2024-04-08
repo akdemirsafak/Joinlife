@@ -26,11 +26,11 @@ public class CountryService : ICountryService
     public async Task DeleteAsync(Guid id)
     {
         //Country'de delete yok.
-       //var clientResult = await _httpClient.DeleteAsync($"country/{id}"); 
-       // if (!clientResult.IsSuccessStatusCode)
-       // {
-       //     throw new Exception("delete country failed");
-       // }
+        //var clientResult = await _httpClient.DeleteAsync($"country/{id}"); 
+        // if (!clientResult.IsSuccessStatusCode)
+        // {
+        //     throw new Exception("delete country failed");
+        // }
     }
 
     public async Task<List<CountryViewModel>> GetAllAsync()
