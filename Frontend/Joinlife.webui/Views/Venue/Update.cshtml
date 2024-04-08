@@ -5,7 +5,7 @@
 
 
 <div class="container">
-    <h3 class="text-center">Yeni şehir</h3>
+    <h3 class="text-center">Mekanı güncelle</h3>
     <div class="row">
         <div class="col-md-6 offset-3">
             <form method="post" asp-action="Update">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="mb-3 form-group">
                     <select asp-for="CityId" asp-items="ViewBag.Cities" class="form-control">
-                        <option value="">Ülke seçiniz</option>
+                        <option value="">Şehiri seçiniz</option>
                     </select>
                     <span asp-validation-for="CityId" class="danger"></span>
                 </div>
