@@ -1,5 +1,3 @@
-using Joinlife.webui.Entities;
-
 namespace Joinlife.webui.Models.EventDtos
 {
     public sealed class GetEventResponse
@@ -9,9 +7,12 @@ namespace Joinlife.webui.Models.EventDtos
         public string? Description { get; set; }
         public string EventType { get; set; }
         public int EventTypeId { get; set; }
-        public Organizer Organizer { get; set; } //Event'i düzenleyen firma
-        public Venue Venue { get; set; } //Nerede
+        public Guid VenueId { get; set; }
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
         public DateTime? CreatedAt { get; set; }
-        public DateTime? LastModifiedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public string Statu { get; set; }
+        public int StatuId { get; set; }
     }
 }

@@ -45,12 +45,6 @@ namespace Joinlife.webui.Controllers
             ViewBag.Cities = new SelectList(await _cityService.GetAllAsync(), "Id", "Name");
             var venue = await _venueService.GetByIdAsync(id);
             var updateInputModel = new UpdateVenueInput(venue.Id, venue.Name, venue.Line, venue.CityId);
-            // {
-            //     Id = venue.Id,
-            //     Name = venue.Name,
-            //     Line = venue.Line,
-            //     CityId = venue.CityId
-            // };
             return View(updateInputModel);
         }
         [HttpPost]

@@ -20,7 +20,7 @@ namespace Joinlife.webui.Controllers
 
         public async Task<IActionResult> Detail(Guid id)
         {
-            return View(await _countryService.GetAsync(id));
+            return View(await _countryService.GetByIdAsync(id));
         }
 
         [HttpGet]
@@ -37,7 +37,7 @@ namespace Joinlife.webui.Controllers
         [HttpGet]
         public async Task<IActionResult> Update(Guid id)
         {
-            var countryResponse = await _countryService.GetAsync(id);
+            var countryResponse = await _countryService.GetByIdAsync(id);
             var updateCountryInputModel = new UpdateCountryInput
             {
                 Name = countryResponse.Name,
