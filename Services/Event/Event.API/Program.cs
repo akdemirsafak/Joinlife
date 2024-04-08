@@ -1,14 +1,11 @@
-using Event.API.Core;
 using Event.API.DbContexts;
 using Event.API.Filters;
 using Event.API.Mapping;
-using Event.API.Repositories;
 using Event.API.Services;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-using Ticket.API.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,10 +27,7 @@ builder.Services.AddDbContext<EventyDbContext>(options =>
 });
 
 builder.Services.AddScoped<IEventService, EventService>();
-builder.Services.AddScoped<ITicketService, TicketService>();
-
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-
+builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddAutoMapper(typeof(EventMapper));
 
 builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());

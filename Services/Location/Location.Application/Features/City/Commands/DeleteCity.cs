@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using Location.Application.Services;
-using Location.Domain.Models;
 using MediatR;
 using SharedLib.Dtos;
 

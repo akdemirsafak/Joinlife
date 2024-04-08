@@ -1,6 +1,5 @@
-using Joinlife.webui.Core.Services;
+﻿using Joinlife.webui.Core.Services;
 using Joinlife.webui.Models.City;
-using SharedLib.Dtos;
 
 namespace Joinlife.webui.Services;
 
@@ -50,6 +49,5 @@ public class CityService : ICityService
         {
             throw new Exception("update city failed");
         }
-        var result = await clientResult.Content.ReadFromJsonAsync<AppResponse<GetCityResponse>>();
     }
 }

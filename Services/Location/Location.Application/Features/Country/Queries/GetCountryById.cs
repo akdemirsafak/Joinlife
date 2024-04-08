@@ -21,7 +21,7 @@ public static class GetCountryById
 
         public async Task<AppResponse<GetCountryResponse>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return AppResponse<GetCountryResponse>.Success(await _countryService.GetByIdAsync(request.id),200);
+            return AppResponse<GetCountryResponse>.Success(await _countryService.GetByIdAsync(request.id), 200);
         }
     }
 }

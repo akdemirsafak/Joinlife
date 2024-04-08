@@ -1,6 +1,5 @@
 using Joinlife.webui.Core.Services;
 using Joinlife.webui.Models.VenueDtos;
-using SharedLib.Dtos;
 
 namespace Joinlife.webui.Services;
 
@@ -20,7 +19,6 @@ public class VenueService : IVenueService
         {
             throw new Exception("Could not create venue");
         }
-    }
 
     public async Task DeleteAsync(Guid id)
     {
@@ -61,6 +59,5 @@ public class VenueService : IVenueService
         {
             throw new Exception("Could not update venue");
         }
-        var venue= clientResult.Content.ReadFromJsonAsync<AppResponse<GetVenueResponse>>();
     }
 }

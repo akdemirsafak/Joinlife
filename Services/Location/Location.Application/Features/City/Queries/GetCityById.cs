@@ -20,7 +20,7 @@ public static class GetCityById
 
         public async Task<AppResponse<GetCityResponse>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return AppResponse<GetCityResponse>.Success(await _cityService.GetByIdAsync(request.Id),200);
+            return AppResponse<GetCityResponse>.Success(await _cityService.GetByIdAsync(request.Id), 200);
         }
     }
     public sealed class QueryValidator : AbstractValidator<Query>

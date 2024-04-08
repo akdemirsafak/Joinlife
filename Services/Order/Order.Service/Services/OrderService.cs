@@ -18,37 +18,38 @@ namespace Order.Service.Services
         public async Task<AppResponse<CreatedOrderResponse>> CreateAsync(CreateOrderRequest request)
         {
             //var order=request.Adapt<Order.Domain.Entity.Order>();
-            
-            
+
+
             var order = new Domain.Entity.Order
             {
                 BuyerId = request.BuyerId,
                 OrderItems=new List<Domain.Entity.OrderItem>()
             };
             request.OrderItems.ForEach(orderItem => order.OrderItems.Add(
-                new Domain.Entity.OrderItem { 
-                    Amount=orderItem.Amount,
-                    Price=orderItem.Price,
-                    TicketId=orderItem.TicketId,
-                    TicketName=orderItem.TicketName
+                new Domain.Entity.OrderItem
+                {
+                    Amount = orderItem.Amount,
+                    Price = orderItem.Price,
+                    TicketId = orderItem.TicketId,
+                    TicketName = orderItem.TicketName
                 }));
-            order.TotalPrice= order.OrderItems.Sum(item => item.Price * item.Amount);
+            order.TotalPrice = order.OrderItems.Sum(item => item.Price * item.Amount);
             // !  order.BuyerId = request.BuyerId; // TODO CurrentUserId
             await _orderRepository.CreateAsync(order);
 
-            return AppResponse<CreatedOrderResponse>.Success(order.Adapt<CreatedOrderResponse>(),201);
+            return AppResponse<CreatedOrderResponse>.Success(order.Adapt<CreatedOrderResponse>(), 201);
         }
 
         public async Task<AppResponse<List<GetOrderResponse>>> GetAllAsync()
         {
             var orders = await _orderRepository.GetAllAsync();
-            return AppResponse<List<GetOrderResponse>>.Success(orders.Adapt<List<GetOrderResponse>>(),200);
+            return AppResponse<List<GetOrderResponse>>.Success(orders.Adapt<List<GetOrderResponse>>(), 200);
         }
 
         public async Task<AppResponse<GetOrderResponse>> GetByIdAsync(Guid id)
         {
             var order = await _orderRepository.GetByIdAsync(id);
-            return AppResponse<GetOrderResponse>.Success(order.Adapt<GetOrderResponse>(),200);
+            return AppResponse<GetOrderResponse>.Success(order.Adapt<GetOrderResponse>(), 200);
         }
     }
 }

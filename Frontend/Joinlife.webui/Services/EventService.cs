@@ -1,6 +1,5 @@
 using Joinlife.webui.Core.Services;
 using Joinlife.webui.Models.EventDtos;
-using SharedLib.Dtos;
 
 namespace Joinlife.webui.Services;
 
@@ -22,8 +21,6 @@ public sealed class EventService : IEventService
         {
             throw new Exception("Could not create event");
         }
-        var result = await clientResult.Content.ReadFromJsonAsync<AppResponse<GetEventResponse>>();
-    }
 
     public async Task DeleteAsync(Guid id)
     {
@@ -32,7 +29,6 @@ public sealed class EventService : IEventService
         {
             throw new Exception("Country cannot delete.");
         }
-    }
 
     public async Task<List<GetEventResponse>> GetAllAsync()
     {

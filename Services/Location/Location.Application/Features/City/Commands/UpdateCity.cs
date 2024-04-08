@@ -23,7 +23,7 @@ public static class UpdateCity
         public async Task<AppResponse<UpdatedCityResponse>> Handle(Command request, CancellationToken cancellationToken)
         {
             var updatedCity= await _cityService.UpdateAsync(request.Model, request.Id);
-            return AppResponse<UpdatedCityResponse>.Success(updatedCity,200);
+            return AppResponse<UpdatedCityResponse>.Success(updatedCity, 200);
         }
     }
     public sealed class CommadValidator : AbstractValidator<Command>
