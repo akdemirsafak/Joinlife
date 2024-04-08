@@ -8,6 +8,8 @@ using Location.Persistance.Services;
 using Location.Persistance.UnitOfWorks;
 using Location.Presentation;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -15,11 +17,24 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers()
+builder.Services.AddControllers(opt =>
+{
+    opt.Filters.Add(new AuthorizeFilter());
+})
     .AddApplicationPart(typeof(PresentationAssemblyReference).Assembly);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+{
+    opt.Authority = builder.Configuration["IdentityServerURL"];
+    opt.Audience = "location_resource";
+    opt.RequireHttpsMetadata = true;
+});
+
+
 
 
 builder.Services.AddMediatR(cfg =>

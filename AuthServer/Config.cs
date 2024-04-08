@@ -2,25 +2,49 @@
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
 
+using IdentityServer4;
 using IdentityServer4.Models;
+using System;
 using System.Collections.Generic;
 
 namespace AuthServer
 {
     public static class Config
     {
+
+        public static IEnumerable<ApiResource> ApiResources => new ApiResource[] { 
+        
+            new ApiResource(IdentityServerConstants.LocalApi.ScopeName),
+            new ApiResource("location_resource"){Scopes={"location_fullpermission"}},
+            new ApiResource("event_resource"){Scopes={"event_fullpermission"}},
+            new ApiResource("ticket_resource"){Scopes={"ticket_fullpermission"}},
+            new ApiResource("gateway_resource"){Scopes={"gateway_fullpermission"}},
+            new ApiResource("fileapi_resource"){Scopes={"fileapi_fullpermission"}},
+            new ApiResource("payment_resource"){Scopes={"payment_fullpermission"}},
+        
+        };
+
+
         public static IEnumerable<IdentityResource> IdentityResources =>
                    new IdentityResource[]
                    {
-                new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
+                        new IdentityResources.OpenId(),
+                        new IdentityResources.Profile(),
+                        new IdentityResources.Email(),
+                        new IdentityResource(){ Name="roles",DisplayName="Roles" ,Description="Kullanıcı rolleri",UserClaims=new[]{ "role"} } 
+                        //Kendi claim'imizi oluşturuyoruz yukarıdakiler hazır claimler
                    };
 
         public static IEnumerable<ApiScope> ApiScopes =>
             new ApiScope[]
             {
-                new ApiScope("scope1"),
-                new ApiScope("scope2"),
+                new ApiScope(IdentityServerConstants.LocalApi.ScopeName), //IdentityServer'a istek yapabilmemiz için kendi sabitidir.
+                new ApiScope("location_fullpermission","Location'a request için full yetki."),
+                new ApiScope("event_fullpermission","Event'a request için full yetki."),
+                new ApiScope("ticket_fullpermission","Ticket'a request için full yetki."),
+                new ApiScope("gateway_fullpermission","Gateway'e request için full yetki."),
+                new ApiScope("fileapi_fullpermission","FileApi'a request için full yetki."),
+                new ApiScope("payment_fullpermission","Payment'a request için full yetki.")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -29,30 +53,50 @@ namespace AuthServer
                 // m2m client credentials flow client
                 new Client
                 {
-                    ClientId = "m2m.client",
-                    ClientName = "Client Credentials Client",
-
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets = { new Secret("511536EF-F270-4058-80CA-1C89C192F69A".Sha256()) },
-
-                    AllowedScopes = { "scope1" }
+                    ClientId = "WebMvcClient",
+                    ClientName = "Asp.Net Core MVC",
+                    ClientSecrets = { new Secret("Secret-1234".Sha256()) },
+                    AllowedGrantTypes = GrantTypes.ClientCredentials, //Refresh token barındırmayan grant type'dır.
+                    AllowedScopes = {
+                        "location_fullpermission",
+                        "event_fullpermission",
+                        "gateway_fullpermission",
+                        "fileapi_fullpermission",
+                        "payment_fullpermission",
+                        IdentityServerConstants.LocalApi.ScopeName //Bu scope'da belirlediğimiz clientId ve Secret ile hangi api'lara istek yapılabileceğini burada belirtiyoruz.
+                    },
+                    AccessTokenLifetime=30*24*60*60 //30 gün
                 },
 
-                // interactive client using code flow + pkce
-                new Client
+                new Client()
                 {
-                    ClientId = "interactive",
-                    ClientSecrets = { new Secret("49C1A7E1-0C79-4A89-A3D6-A37998FB86B0".Sha256()) },
-
-                    AllowedGrantTypes = GrantTypes.Code,
-
-                    RedirectUris = { "https://localhost:44300/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:44300/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:44300/signout-callback-oidc" },
-
-                    AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "scope2" }
+                    ClientId="WebMvcClientForUser",
+                    ClientName="Asp.Net Core MVC",
+                    ClientSecrets={new Secret("Secret-1234".Sha256())},
+                    AllowedGrantTypes=GrantTypes.ResourceOwnerPassword, //ResourceOwnerPasswordAndClientCredentials kullanırsak refresh token kullanamayız.
+                    AllowOfflineAccess=true, //**** OfflineAccess Kullanıcı offline olsa bile kullanıcı adına bir refresh token göndererek kullanıcı için yeni bir accesstoken almamıza olanak verir.
+                    AllowedScopes={
+                        "location_fullpermission",
+                        "event_fullpermission",
+                        "ticket_fullpermission",
+                        "gateway_fullpermission",
+                        "fileapi_fullpermission",
+                        "payment_fullpermission",
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.LocalApi.ScopeName, //API'ın kendisine istek yapabilmek için
+                        IdentityServerConstants.StandardScopes.OfflineAccess,//Refresh token dönebilmemiz için OfflineAccess'de ekledik.
+                        "roles"
+                    },
+                    AccessTokenLifetime=60*60, //1 Saat
+                    RefreshTokenUsage=TokenUsage.ReUse,
+                    RefreshTokenExpiration=TokenExpiration.Absolute, 
+                    //Refresh token'ın süresi dolduğunda süreyi uzatacak mıyız ayarıdır.Yaptığımız ayar sabite denk gelir.
+                    AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds, //60 gün
+                   // ! Her accesstoken alımında yeni bir refresh token da alınacaktır!.
                 },
+
             };
     }
 }

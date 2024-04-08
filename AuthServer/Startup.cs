@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AuthServer.Services;
 
 namespace AuthServer
 {
@@ -28,6 +29,9 @@ namespace AuthServer
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddLocalApiAuthentication(); //Scope işlemleri arkaplanda dönüyor.
+
+
             services.AddControllersWithViews();
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -48,9 +52,13 @@ namespace AuthServer
                 options.EmitStaticAudienceClaim = true;
             })
                 .AddInMemoryIdentityResources(Config.IdentityResources)
+                .AddInMemoryApiResources(Config.ApiResources)
                 .AddInMemoryApiScopes(Config.ApiScopes)
                 .AddInMemoryClients(Config.Clients)
                 .AddAspNetIdentity<ApplicationUser>();
+
+
+            builder.AddResourceOwnerValidator<IdentityResourceOwnerPasswordValidator>();
 
             // not recommended for production - you need to store your key material somewhere secure
             builder.AddDeveloperSigningCredential();
@@ -80,6 +88,9 @@ namespace AuthServer
 
             app.UseRouting();
             app.UseIdentityServer();
+
+            app.UseAuthentication();
+
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
