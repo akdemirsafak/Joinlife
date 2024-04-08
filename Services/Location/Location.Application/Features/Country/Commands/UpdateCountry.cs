@@ -22,7 +22,7 @@ public static class UpdateCountry
 
         public async Task<AppResponse<UpdatedCountryResponse>> Handle(Command request, CancellationToken cancellationToken)
         {
-            return AppResponse<UpdatedCountryResponse>.Success(await _countryService.UpdateAsync(request.Model, request.Id),200);
+            return AppResponse<UpdatedCountryResponse>.Success(await _countryService.UpdateAsync(request.Model, request.Id), 200);
         }
     }
     public sealed class CommandValidator : AbstractValidator<Command>

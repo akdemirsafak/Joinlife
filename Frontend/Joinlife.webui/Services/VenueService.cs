@@ -1,66 +1,86 @@
 using Joinlife.webui.Core.Services;
 using Joinlife.webui.Models.VenueDtos;
-using SharedLib.Dtos;
 
-namespace Joinlife.webui.Services;
-
-public class VenueService : IVenueService
+namespace Joinlife.webui.Services
 {
-    private readonly HttpClient _httpClient;
-
-    public VenueService(HttpClient httpClient)
+    public class VenueService : IVenueService
     {
-        _httpClient = httpClient;
-    }
+        private readonly IRepository<Venue> _venueRepository;
+        private readonly IRepository<City> _cityRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        VenueMapper venueMapper = new();
 
-    public async Task CreateAsync(CreateVenueInput input)
-    {
-        var clientResult = await _httpClient.PostAsJsonAsync("venue", input);
-        if (!clientResult.IsSuccessStatusCode)
+        public VenueService(IRepository<Venue> venueRepository,
+            IRepository<City> cityRepository,
+            IUnitOfWork unitOfWork)
         {
-            throw new Exception("Could not create venue");
-        }
-    }
-
-    public async Task DeleteAsync(Guid id)
-    {
-        var clientResult = await _httpClient.DeleteAsync($"venue/{id}");
-        if (!clientResult.IsSuccessStatusCode)
-        {
-            throw new Exception("Country cannot delete.");
+            _venueRepository = venueRepository;
+            _cityRepository = cityRepository;
+            _unitOfWork = unitOfWork;
         }
 
-    }
-    public async Task<List<GetVenueResponse>> GetAllAsync()
-    {
-        var clientResult = await _httpClient.GetAsync("venue");
-        if (!clientResult.IsSuccessStatusCode)
+        public async Task CreateAsync(CreateVenueInput input)
         {
-            throw new Exception("Could not get venues");
+            var city = await _cityRepository.GetAsync(x => x.Id == input.CityId);
+            if (city is null)
+                throw new Exception("City not found.");
+            //var entity = venueMapper.CreateVenueInputToVenue(input, city);
+            var entity = new Venue
+            {
+                Name = input.Name,
+                Line = input.Line,
+                City = city
+            };
+            await _venueRepository.CreateAsync(entity);
+            await _unitOfWork.CommitAsync();
         }
-        var result = await clientResult.Content.ReadFromJsonAsync<AppResponse<List<GetVenueResponse>>>();
-        return result.Data;
-    }
 
-    public async Task<GetVenueByIdResponse> GetByIdAsync(Guid id)
-    {
-        var clientResult= await _httpClient.GetAsync($"venue/{id}");
-        if (!clientResult.IsSuccessStatusCode)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new Exception("Could not get venue");
+            var venue = await _venueRepository.GetAsync(x => x.Id == id);
+            await _venueRepository.DeleteAsync(venue);
+            await _unitOfWork.CommitAsync();
         }
-        var result = await clientResult.Content.ReadFromJsonAsync<AppResponse<GetVenueByIdResponse>>();
-        return result.Data;
-    }
 
-    public async Task UpdateAsync(UpdateVenueInput input)
-    {
-        var clientResult = await _httpClient.PutAsJsonAsync($"venue/{input.Id}", input);
-
-        if (!clientResult.IsSuccessStatusCode)
+        public async Task<List<GetVenueResponse>> GetAllAsync()
         {
-            throw new Exception("Could not update venue");
+            var venues = await _venueRepository.GetAllAsync();
+            var response = venueMapper.VenueListToGetVenueResponseList(venues);
+            return response;
         }
-        var venue= clientResult.Content.ReadFromJsonAsync<AppResponse<GetVenueResponse>>();
+
+        public async Task<GetVenueByIdResponse> GetByIdAsync(Guid id)
+        {
+            Venue venue = await _venueRepository.GetAsync(x => x.Id == id);
+            if (venue is null)
+                throw new Exception("Venue not found.");
+
+            // return venueMapper.VenueToGetVenueByIdResponse(venue);
+            return new GetVenueByIdResponse
+            {
+                Id = venue.Id,
+                Name = venue.Name,
+                Line = venue.Line,
+                CityId = venue.City.Id,
+                CityName = venue.City.Name
+            };
+        }
+
+        public async Task UpdateAsync(UpdateVenueInput input)
+        {
+            var city = await _cityRepository.GetAsync(x => x.Id == input.CityId);
+            if (city is null)
+                throw new Exception("City is not found.");
+            // var entity = venueMapper.UpdateVenueInputToVenue(input, city);
+            var entity = new Venue
+            {
+                Id = input.Id,
+                Name = input.Name,
+                Line = input.Line,
+                City = city
+            };
+            await _venueRepository.UpdateAsync(entity);
+            await _unitOfWork.CommitAsync();
+        }
     }
 }

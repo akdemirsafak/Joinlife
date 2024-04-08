@@ -19,7 +19,7 @@ public static class GetCities
 
         public async Task<AppResponse<List<GetCityResponse>>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return AppResponse<List<GetCityResponse>>.Success(await _cityService.GetAllAsync(),200);
+            return AppResponse<List<GetCityResponse>>.Success(await _cityService.GetAllAsync(), 200);
         }
     }
 }

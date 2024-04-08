@@ -40,7 +40,7 @@ public class CityController : CustomBaseController
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(Guid id)
     {
-        
+
         return CreateActionResult(await _mediator.Send(new DeleteCity.Command(id)));
     }
 }

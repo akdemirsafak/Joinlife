@@ -1,10 +1,10 @@
-using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Order.Domain.Repositories;
 using Order.Domain.Services;
 using Order.Repository.DbContexts;
 using Order.Repository.Repositories;
 using Order.Service.Services;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 

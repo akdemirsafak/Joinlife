@@ -76,10 +76,10 @@ public class VenueService : IVenueService
         venue.Line = request.Line;
         venue.City = city;
         venue.UpdatedAt = DateTime.Now;
-       
+
         await _venueRepository.UpdateAsync(venue);
         await _unitOfWork.SaveChangesAsync();
-        
+
         var updatedResponse=venueMapper.VenueToUpdatedVenueResponse(venue);
         return updatedResponse;
 

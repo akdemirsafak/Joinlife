@@ -1,4 +1,5 @@
-﻿namespace SharedLib.Dtos { 
+﻿namespace SharedLib.Dtos
+{
     public class NoContentResponse
     {
     }
