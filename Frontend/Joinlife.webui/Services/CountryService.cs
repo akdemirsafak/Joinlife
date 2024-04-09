@@ -38,7 +38,7 @@ public class CountryService : ICountryService
         var response = await _httpClient.GetAsync("country");
         if (!response.IsSuccessStatusCode)
         {
-            return null;
+            return new List<CountryViewModel>();
         }
 
         var countryResponse = await response.Content.ReadFromJsonAsync<AppResponse<List<CountryViewModel>>>();

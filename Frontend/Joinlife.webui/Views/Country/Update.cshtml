@@ -23,9 +23,15 @@
 
                     </form>
                 </div>
-                <a asp-action="Detail" asp-route-id="@Model.Id">Ayrıntılara geri dön.</a>
+                <a asp-action="Detail" asp-route-id="Id">Ayrıntılara geri dön.</a>
 
             </div>
         </div>
     </div>
 </div>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

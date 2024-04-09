@@ -3,6 +3,7 @@
     public class ServiceApiSettings
     {
         public string GatewayUrl { get; set; }
+        public string IdentityBaseUri { get; set; }
         public ServiceApi Event { get; set; }
         public ServiceApi Location { get; set; }
         public ServiceApi Order { get; set; }
