@@ -1,5 +1,6 @@
 using Joinlife.webui.Common;
 using Joinlife.webui.Core.Services;
+using Joinlife.webui.Mappers;
 using Joinlife.webui.Models.EventDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,6 +11,7 @@ public class EventController : Controller
 {
     private readonly IEventService _eventService;
     private readonly IVenueService _venueService;
+    CommonMapper _mapper =new CommonMapper();
 
 
     public EventController(IEventService eventService, IVenueService venueService)
@@ -68,7 +70,8 @@ public class EventController : Controller
     public async Task<IActionResult> Update(Guid id)
     {
         var organization = await _eventService.GetAsync(id);
-        var organizationUpdateInputModel = new UpdateEventInput(id, organization.Name, organization.Description, organization.EventTypeId, organization.VenueId,organization.StartDateTime,organization.EndDateTime,organization.StatuId);
+
+        var organizationUpdateInputModel= _mapper.GetEventByIdResponseToUpdateEventInput(organization);
         ViewBag.Venues = new SelectList(await _venueService.GetAllAsync(), "Id", "Name");
         // ! ViewBag'ler yerine Tempdata'lar kullanalım ki hata çıkması durumunda sayfadaki selectlist'ler gelsin.
         var eventTypes = Enum.GetValues(typeof(EventTypeEnum))

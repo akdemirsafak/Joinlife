@@ -1,4 +1,5 @@
 using Joinlife.webui.Core.Services;
+using Joinlife.webui.Mappers;
 using Joinlife.webui.Models.VenueDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -10,7 +11,7 @@ public class VenueController : Controller
 {
     private readonly IVenueService _venueService;
     private readonly ICityService _cityService;
-
+    CommonMapper _mapper = new CommonMapper();
     public VenueController(IVenueService venueService, ICityService cityService)
     {
         _venueService = venueService;
@@ -44,7 +45,8 @@ public class VenueController : Controller
     {
         ViewBag.Cities = new SelectList(await _cityService.GetAllAsync(), "Id", "Name");
         var venue = await _venueService.GetByIdAsync(id);
-        var updateInputModel = new UpdateVenueInput(venue.Id, venue.Name, venue.Line, venue.CityId);
+
+        var updateInputModel = _mapper.GetVenueByIdResponseToUpdateVenueInput(venue);
         return View(updateInputModel);
     }
     [HttpPost]
