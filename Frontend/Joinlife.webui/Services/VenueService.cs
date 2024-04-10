@@ -50,7 +50,8 @@ public class VenueService : IVenueService
             throw new Exception("Could not get venue");
         }
         var result = await clientResult.Content.ReadFromJsonAsync<AppResponse<GetVenueByIdResponse>>();
-        return result.Data;
+        var data= result.Data;
+        return data;
     }
 
     public async Task UpdateAsync(UpdateVenueInput input)
