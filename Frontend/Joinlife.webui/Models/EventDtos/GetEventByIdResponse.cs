@@ -11,6 +11,7 @@ namespace Joinlife.webui.Models.EventDtos
         public string? Description { get; set; }
         public string EventType { get; set; }
         public int EventTypeId { get; set; }
+        public string? ImageUrl { get; set; }
         public Guid VenueId { get; set; } //Nerede
         public int StatuId { get; set; } = 1;
         public DateTime StartDateTime { get; set; }

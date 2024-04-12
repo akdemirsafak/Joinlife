@@ -6,16 +6,20 @@ namespace Joinlife.webui.Services;
 
 public sealed class EventService : IEventService
 {
-
+    private readonly IFileService _fileService;
     private readonly HttpClient _httpClient;
     //Service Requests
-    public EventService(HttpClient httpClient)
+    public EventService(HttpClient httpClient, IFileService fileService)
     {
         _httpClient = httpClient;
+        _fileService = fileService;
     }
 
     public async Task CreateAsync(CreateEventInput input)
     {
+        var imageUrl= await _fileService.UploadImageAsync(input.Image,"event");
+        input.ImageUrl = imageUrl;
+
         var clientResult = await _httpClient.PostAsJsonAsync("event", input);
 
         if (!clientResult.IsSuccessStatusCode)

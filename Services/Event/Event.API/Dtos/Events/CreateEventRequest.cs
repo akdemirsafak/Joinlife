@@ -6,6 +6,7 @@ namespace Event.API.Dtos.Events
     int EventTypeId,
     DateTime StartDateTime,
     DateTime EndDateTime,
+    string ImageUrl,
     int StatuId = 1,
     string? Description = null);
 }

@@ -21,4 +21,6 @@ public sealed class CreateEventInput
     public DateTime StartDateTime { get; set; }
     [Required]
     public DateTime EndDateTime { get; set; }
+    public string? ImageUrl { get; set; }
+    public IFormFile Image { get; set; }
 }

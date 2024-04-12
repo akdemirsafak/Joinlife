@@ -5,6 +5,7 @@ public sealed class Eventy
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;
     public string? Description { get; set; }
+    public string? ImageUrl { get; set; }
     public EventTypeEnum Type { get; set; }
     public Guid VenueId { get; set; }
     public DateTime StartDateTime { get; set; }

@@ -41,6 +41,7 @@ builder.Services.AddScoped<ICityService, CityService>();
 builder.Services.AddScoped<IVenueService, VenueService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<ITicketService, TicketService>();
+builder.Services.AddScoped<IFileService, FileService>();
 
 builder.Services.AddScoped<IIdentitySharedService, IdentitySharedService>();
 
