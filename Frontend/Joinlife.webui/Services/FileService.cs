@@ -12,7 +12,7 @@ public sealed class FileService : IFileService
         _httpClient = httpClient;
     }
 
-    public async Task<string> UploadImageAsync(IFormFile photo,string containerName)
+    public async Task<string> UploadImageAsync(IFormFile photo, string containerName)
     {
 
         if (photo == null || photo.Length <= 0)
@@ -25,16 +25,16 @@ public sealed class FileService : IFileService
         await photo.CopyToAsync(ms);
         var multipartContent = new MultipartFormDataContent();
         multipartContent.Add(new ByteArrayContent(ms.ToArray()), "photo", randomFilename);
-        //multipartContent.Add(new StringContent(containerName), "containerName");
-        
+        multipartContent.Add(new StringContent(containerName), "containerName");
 
-        var clientResponse= await _httpClient.PostAsync("photostock",multipartContent);
-        if(!clientResponse.IsSuccessStatusCode)
+
+        var clientResponse = await _httpClient.PostAsync("photostock", multipartContent);
+        if (!clientResponse.IsSuccessStatusCode)
         {
             return null;
         }
         var fileContent = await clientResponse.Content.ReadFromJsonAsync<AppResponse<string>>();
-        var fileName=fileContent.Data;
+        var fileName = fileContent.Data;
         return fileName;
     }
 }
