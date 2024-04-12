@@ -24,7 +24,7 @@
                             <a asp-action="Detail" asp-route-id="@organization.Id">
                                 @organization.Name</a>
                             <h6>Event Türü @organization.EventType</h6>
-
+                            <img class="img-fluid" width="300px" style="height:150px;object-fit:inherit" src="@organization.ImageUrl" alt="@organization.Name"/>
                             <h6>Yer : @foreach(var venue in ViewBag.Venues)
                                 {
                                     if (venue.Id == organization.VenueId)

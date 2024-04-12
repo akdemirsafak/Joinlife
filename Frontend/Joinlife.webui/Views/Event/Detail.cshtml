@@ -7,13 +7,17 @@
     <div class="row">
         <div class="col-md-6 offset-3">
             <div class="card">
-               
+                <div class="card-header text-center bg-white">
+                    <img src="@Model.ImageUrl" class="img-fluid mx-auto" alt="@Model.Name" style="max-height:400px" />
+               </div>
                 <div class="card-body">
-                    <p>Event ayrıntıları : @Model.Description</p>
-                    @* <p>Konum : @Model.Venue.Name , @Model.Venue.City.Name</p> *@
+                    <h4>Event ayrıntıları :</h4>
+                    <p>@Model.Description</p>
+                    <div class="text-end fw-bolder">
+                        Konum : <span class="text-primary">@ViewBag.Venue.Name, @ViewBag.Venue.City.Name</span></p>
                 </div>
 
-                <div class="card-footer btn-group">
+                <div class="card-footer btn-group d-flex">
                     <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-warning">Güncelle</a>
                     <form method="post">
                         <button asp-action="Delete" asp-route-id="@Model.Id" type="submit"

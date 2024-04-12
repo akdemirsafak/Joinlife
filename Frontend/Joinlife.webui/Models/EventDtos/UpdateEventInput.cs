@@ -22,5 +22,4 @@ public sealed class UpdateEventInput
     public DateTime EndDateTime { get; set; }
     [Required] 
     public int StatuId { get; set; }
-
 }

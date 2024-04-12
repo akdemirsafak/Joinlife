@@ -28,7 +28,9 @@ public class EventController : Controller
 
     public async Task<IActionResult> Detail(Guid id)
     {
-        return View(await _eventService.GetAsync(id));
+        var organization=await _eventService.GetAsync(id);
+        ViewBag.Venue = await _venueService.GetByIdAsync(organization.VenueId);
+        return View(organization);
     }
     public async Task<IActionResult> Create()
     {
