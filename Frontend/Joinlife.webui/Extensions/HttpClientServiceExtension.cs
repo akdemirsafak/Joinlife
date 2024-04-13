@@ -20,6 +20,10 @@ public static class HttpClientServiceExtension
         {
             options.BaseAddress = new Uri($"{serviceApiSettings.IdentityBaseUri}");
         });
+        services.AddHttpClient<IUserService, UserService>(options =>
+        {
+            options.BaseAddress = new Uri($"{serviceApiSettings.IdentityBaseUri}");
+        }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
 
 
