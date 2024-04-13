@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Joinlife.webui.Models.Tickets;
+using System.ComponentModel;
 
 namespace Joinlife.webui.Models.EventDtos
 {
@@ -14,6 +15,7 @@ namespace Joinlife.webui.Models.EventDtos
         public string? ImageUrl { get; set; }
         public Guid VenueId { get; set; } //Nerede
         public int StatuId { get; set; } = 1;
+        public List<TicketViewModel> Tickets { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public DateTime? CreatedAt { get; set; }

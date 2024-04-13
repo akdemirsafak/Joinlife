@@ -8,6 +8,7 @@ public sealed class Tickety
     [Required, Length(2, 32)]
     public string Name { get; set; } = null!;
     public Guid EventId { get; set; }
+    public Eventy Event { get; set; } = null!;
     [DataType("decimal(18,2)")]
     public decimal Price { get; set; }
 

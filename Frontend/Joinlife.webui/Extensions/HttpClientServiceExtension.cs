@@ -49,7 +49,7 @@ public static class HttpClientServiceExtension
         services.AddHttpClient<ITicketService, TicketService>(opt =>
         {
             opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}/{serviceApiSettings.Event.Path}");
-        }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+        }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
         
 
 

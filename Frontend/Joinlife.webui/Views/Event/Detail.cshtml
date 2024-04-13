@@ -11,13 +11,29 @@
                     <img src="@Model.ImageUrl" class="img-fluid mx-auto" alt="@Model.Name" style="max-height:400px" />
                </div>
                 <div class="card-body">
-                    <h4>Event ayrıntıları :</h4>
-                    <p>@Model.Description</p>
-                    <div class="text-end fw-bolder">
-                        Konum : <span class="text-primary">@ViewBag.Venue.Name, @ViewBag.Venue.City.Name</span></p>
+                    <h2 class="text-center"> @Model.Name</h2>
+                    <h6 >Event ayrıntıları :</h6>
+                    <p class="text-opacity-75">@Model.Description</p>
+                   
+                    <div class="text-end d-flex justify-content-end ">
+                        <span class="material-symbols-outlined text-danger">distance</span> 
+                        <span>Konum : @ViewBag.Venue.Name, @ViewBag.Venue.City.Name</span>
+                    </div>
+                        @foreach(var ticket in Model.Tickets)
+                        {
+
+                        <div class="justify-content-between text-end mt-2">
+                            <span class="badge bg-primary">@ticket.Name Bilet</span>  
+                            <span class="">@ticket.Price TL</span>
+                        </div>
+
+                                   
+
+                        }
                 </div>
 
                 <div class="card-footer btn-group d-flex">
+                        <a asp-controller="Ticket" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-outline-primary">Bilet tanımla</a>
                     <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-warning">Güncelle</a>
                     <form method="post">
                         <button asp-action="Delete" asp-route-id="@Model.Id" type="submit"
