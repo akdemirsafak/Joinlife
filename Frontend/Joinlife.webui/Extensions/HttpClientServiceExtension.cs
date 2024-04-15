@@ -66,7 +66,12 @@ public static class HttpClientServiceExtension
         services.AddHttpClient<IFileService, FileService>(opt =>
         {
             opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}/{serviceApiSettings.File.Path}");
-        });
+        }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+        services.AddHttpClient<IBasketService, BasketService>(opt =>
+        {
+            opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}/{serviceApiSettings.Basket.Path}");
+        }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
     }
 }

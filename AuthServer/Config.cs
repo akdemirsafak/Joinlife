@@ -17,6 +17,7 @@ namespace AuthServer
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName),
             new ApiResource("location_resource"){Scopes={"location_fullpermission"}},
             new ApiResource("event_resource"){Scopes={"event_fullpermission"}},
+            new ApiResource("basket_resource"){Scopes={"basket_fullpermission"}},
             new ApiResource("ticket_resource"){Scopes={"ticket_fullpermission"}},
             new ApiResource("gateway_resource"){Scopes={"gateway_fullpermission"}},
             new ApiResource("fileapi_resource"){Scopes={"fileapi_fullpermission"}},
@@ -44,7 +45,8 @@ namespace AuthServer
                 new ApiScope("ticket_fullpermission","Ticket'a request için full yetki."),
                 new ApiScope("gateway_fullpermission","Gateway'e request için full yetki."),
                 new ApiScope("fileapi_fullpermission","FileApi'a request için full yetki."),
-                new ApiScope("payment_fullpermission","Payment'a request için full yetki.")
+                new ApiScope("payment_fullpermission","Payment'a request için full yetki."),
+                new ApiScope("basket_fullpermission","Basket'e request için full yetki.")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -76,8 +78,7 @@ namespace AuthServer
                     AllowedGrantTypes=GrantTypes.ResourceOwnerPassword, //ResourceOwnerPasswordAndClientCredentials kullanırsak refresh token kullanamayız.
                     AllowOfflineAccess=true, //**** OfflineAccess Kullanıcı offline olsa bile kullanıcı adına bir refresh token göndererek kullanıcı için yeni bir accesstoken almamıza olanak verir.
                     AllowedScopes={
-                        "location_fullpermission",
-                        "event_fullpermission",
+                        "basket_fullpermission",
                         "ticket_fullpermission",
                         "gateway_fullpermission",
                         "fileapi_fullpermission",
@@ -95,7 +96,7 @@ namespace AuthServer
                     //Refresh token'ın süresi dolduğunda süreyi uzatacak mıyız ayarıdır.Yaptığımız ayar sabite denk gelir.
                     AbsoluteRefreshTokenLifetime=(int)(DateTime.Now.AddDays(60)-DateTime.Now).TotalSeconds, //60 gün
                    // ! Her accesstoken alımında yeni bir refresh token da alınacaktır!.
-                },
+                },  
 
             };
     }
