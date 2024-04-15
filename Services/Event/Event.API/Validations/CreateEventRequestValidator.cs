@@ -23,11 +23,10 @@ namespace Event.API.Validations
             RuleFor(x => x.EventTypeId)
                 .GreaterThan(0);
 
-            RuleFor(x => x.StartDateTime)
-                .GreaterThan(DateTime.Now);
+            RuleFor(x => x.StartDateTime);
 
             RuleFor(x => x.EndDateTime)
-                .GreaterThan(x => x.StartDateTime);
+                .Must(predicate: (request, endDateTime) => endDateTime > request.StartDateTime);
         }
     }
 }

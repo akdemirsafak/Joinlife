@@ -33,7 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotGateway", "Gateways\O
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer", "AuthServer\AuthServer.csproj", "{3D3701F0-1A09-44EA-9F2A-0FBA2064A0D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "File.API", "Services\File\File.API\File.API.csproj", "{8D9B87F2-F386-4204-B7BF-16C8AB67DF4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "File.API", "Services\File\File.API\File.API.csproj", "{8D9B87F2-F386-4204-B7BF-16C8AB67DF4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.API", "Services\Basket\Basket.API\Basket.API.csproj", "{78B97C78-CAED-41B2-BFAF-1E240A1D7C91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{8D9B87F2-F386-4204-B7BF-16C8AB67DF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D9B87F2-F386-4204-B7BF-16C8AB67DF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D9B87F2-F386-4204-B7BF-16C8AB67DF4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78B97C78-CAED-41B2-BFAF-1E240A1D7C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78B97C78-CAED-41B2-BFAF-1E240A1D7C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78B97C78-CAED-41B2-BFAF-1E240A1D7C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78B97C78-CAED-41B2-BFAF-1E240A1D7C91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -14,6 +14,7 @@ public static class HttpClientServiceExtension
         
         services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
 
+        services.AddScoped<IIdentityService, IdentityService>();
         //IdentityService
 
         services.AddHttpClient<IIdentityService, IdentityService>(options =>

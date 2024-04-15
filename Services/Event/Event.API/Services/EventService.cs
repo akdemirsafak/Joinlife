@@ -1,6 +1,7 @@
 using AutoMapper;
 using Event.API.Core;
 using Event.API.Dtos.Events;
+using Event.API.Dtos.Tickets;
 using Event.API.Entities;
 using SharedLib.Dtos;
 
@@ -39,11 +40,34 @@ public class EventService : IEventService
         return AppResponse<List<GetEventReponse>>.Success(responseModel, 200);
     }
 
-    public async Task<AppResponse<GetEventReponse>> GetByIdAsync(Guid id)
+    public async Task<AppResponse<GetEventByIdResponse>> GetByIdAsync(Guid id)
     {
         var entity = await _eventRepository.GetAsync(x => x.Id == id);
-        var getEventResponse = _mapper.Map<GetEventReponse>(entity);
-        return AppResponse<GetEventReponse>.Success(getEventResponse, 200);
+        //var getEventResponse = _mapper.Map<GetEventByIdResponse>(entity);
+        var getEventResponse= new GetEventByIdResponse
+        {
+            Id = entity.Id,
+            Name = entity.Name,
+            Description = entity.Description,
+            EventType = entity.Type.ToString(),
+            EventTypeId = (int)entity.Type,
+            ImageUrl = entity.ImageUrl,
+            VenueId = entity.VenueId,
+            StatuId = (int)entity.Statu,
+            Statu = entity.Statu.ToString(),
+            StartDateTime = entity.StartDateTime,
+            EndDateTime = entity.EndDateTime,
+            CreatedAt = entity.CreatedAt,
+            LastModifiedAt = entity.UpdatedAt,
+            Tickets= entity.Tickets.Select(x=>new GetTicketResponse
+            {
+                Id=x.Id,
+                Name=x.Name,
+                Price=x.Price,
+                EventId=x.Event.Id
+            }).ToList()
+        };
+        return AppResponse<GetEventByIdResponse>.Success(getEventResponse, 200);
     }
 
     public async Task<AppResponse<UpdatedEventResponse>> UpdateAsync(UpdateEventRequest request, Guid id)

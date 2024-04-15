@@ -2,13 +2,12 @@
 
 namespace Event.API.Entities;
 
-public sealed class Tickety
+public class Tickety
 {
     public Guid Id { get; set; }
     [Required, Length(2, 32)]
     public string Name { get; set; } = null!;
-    public Guid EventId { get; set; }
-    public Eventy Event { get; set; } = null!;
+    public virtual Eventy Event { get; set; } = null!;
     [DataType("decimal(18,2)")]
     public decimal Price { get; set; }
 

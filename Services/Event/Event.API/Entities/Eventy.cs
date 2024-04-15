@@ -1,6 +1,6 @@
 ﻿namespace Event.API.Entities;
 
-public sealed class Eventy
+public class Eventy
 {
     public Guid Id { get; set; }
     public string Name { get; set; } = null!;
@@ -13,7 +13,7 @@ public sealed class Eventy
     public DateTime? CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }
     public EventStatusEnum Statu { get; set; }
-    public List<Tickety> Tickets { get; set; }
+    public virtual ICollection<Tickety> Tickets { get; set; }
 
 
     public Eventy()
