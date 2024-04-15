@@ -10,7 +10,8 @@ public sealed class TicketMapper : Profile
     {
         CreateMap<Tickety, CreatedTicketResponse>();
         CreateMap<CreateTicketRequest, Tickety>();
-        CreateMap<Tickety, GetTicketResponse>();
+        CreateMap<Tickety, GetTicketResponse>()
+            .ForMember(dest => dest.EventId,src=>src.MapFrom(x=>x.Event.Id));
         CreateMap<Tickety, UpdatedTicketResponse>();
     }
 }

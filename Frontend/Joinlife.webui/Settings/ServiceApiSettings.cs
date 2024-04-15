@@ -9,6 +9,7 @@
         public ServiceApi Order { get; set; }
         public ServiceApi Ticket { get; set; }
         public ServiceApi File { get; set; }
+        public ServiceApi Basket { get; set; }
     }
     public class ServiceApi
     {

@@ -1,4 +1,6 @@
+﻿using Joinlife.webui.Exceptions;
 using Joinlife.webui.Models;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -26,6 +28,11 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
+        var errorFeature= HttpContext.Features.Get<IExceptionHandlerFeature>();
+        if (errorFeature is not null && errorFeature.Error is UnAuthorizeException) //Bizim fırlattığımız hata
+        {
+            return RedirectToAction(nameof(AuthController.LogOut),"Auth");
+        }
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }

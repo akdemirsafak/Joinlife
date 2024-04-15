@@ -73,9 +73,6 @@ namespace Event.API.Migrations
                     b.Property<Guid>("EventId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("EventyId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -85,16 +82,20 @@ namespace Event.API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventyId");
+                    b.HasIndex("EventId");
 
                     b.ToTable("Tickets");
                 });
 
             modelBuilder.Entity("Event.API.Entities.Tickety", b =>
                 {
-                    b.HasOne("Event.API.Entities.Eventy", null)
+                    b.HasOne("Event.API.Entities.Eventy", "Event")
                         .WithMany("Tickets")
-                        .HasForeignKey("EventyId");
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
                 });
 
             modelBuilder.Entity("Event.API.Entities.Eventy", b =>

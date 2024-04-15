@@ -11,9 +11,6 @@ namespace Joinlife.webui.Models.EventDtos
         public string? ImageUrl { get; set; }
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public string Statu { get; set; }
-        public int StatuId { get; set; }
+        public string Duration => (EndDateTime - StartDateTime).ToString(@"hh\:mm");
     }
 }

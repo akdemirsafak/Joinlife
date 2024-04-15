@@ -14,7 +14,7 @@ public sealed class EventyDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Eventy>().Navigation(e => e.Tickets).AutoInclude();
-        modelBuilder.Entity<Eventy>().HasMany(e => e.Tickets).WithOne(t => t.Event).HasForeignKey(t => t.EventId);
+        modelBuilder.Entity<Tickety>().Navigation(e => e.Event).AutoInclude();
         base.OnModelCreating(modelBuilder);
     }
 }

@@ -11,7 +11,11 @@
       ],
       "UpstreamPathTemplate": "/services/event/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "UpstreamScheme": "https"
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "event_fullpermission" ]
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -24,7 +28,11 @@
       ],
       "UpstreamPathTemplate": "/services/location/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "UpstreamScheme": "https"
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "location_fullpermission" ]
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -37,7 +45,11 @@
       ],
       "UpstreamPathTemplate": "/services/order/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "UpstreamScheme": "https"
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "order_fullpermission" ]
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -50,7 +62,11 @@
       ],
       "UpstreamPathTemplate": "/services/ticket/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "UpstreamScheme": "https"
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "ticket_fullpermission" ]
+      }
     },
     {
       "DownstreamPathTemplate": "/api/{everything}",
@@ -63,7 +79,29 @@
       ],
       "UpstreamPathTemplate": "/services/file/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
-      "UpstreamScheme": "https"
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "fileapi_fullpermission" ]
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/services/basket/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "basket_fullpermission" ]
+      }
     }
 
 

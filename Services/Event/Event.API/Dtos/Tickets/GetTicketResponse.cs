@@ -1,4 +1,6 @@
-﻿namespace Event.API.Dtos.Tickets;
+﻿using Event.API.Dtos.Events;
+
+namespace Event.API.Dtos.Tickets;
 
 public class GetTicketResponse
 {
@@ -6,4 +8,5 @@ public class GetTicketResponse
     public string Name { get; set; }
     public decimal Price { get; set; }
     public Guid EventId { get; set; }
+    public virtual GetEventReponse Event { get; set; }
 }
