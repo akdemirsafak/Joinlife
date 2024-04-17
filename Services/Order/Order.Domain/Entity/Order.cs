@@ -7,9 +7,15 @@ public sealed class Order
     public DateTime CreatedAt { get; set; }= DateTime.Now;
     public List<OrderItem> OrderItems { get; set; }
     public decimal TotalPrice { get; set; }
+    public StatusEnum Statu { get; set; }
 
     public Order()
     {
         Id = Guid.NewGuid();
     }
+}
+public enum StatusEnum
+{
+    Active,
+    Cancelled
 }

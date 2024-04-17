@@ -1,5 +1,6 @@
-namespace Order.Domain.Models;
-public class OrderItemDto
+﻿namespace Joinlife.webui.ViewModels.Orders;
+
+public class OrderItemViewModel
 {
     public Guid TicketId { get; set; }
     public string TicketName { get; set; }

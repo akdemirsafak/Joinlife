@@ -1,5 +1,7 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Reflection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Order.Domain.Repositories;
@@ -7,18 +9,22 @@ using Order.Domain.Services;
 using Order.Repository.DbContexts;
 using Order.Repository.Repositories;
 using Order.Service.Services;
+using SharedLib.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 
+var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+//requireAuthorizePolicy
+JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 builder.Services.AddControllers(opt =>
 {
-    opt.Filters.Add(new AuthorizeFilter());
+    opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
@@ -28,6 +34,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     opt.RequireHttpsMetadata = true;
 });
 
+
+builder.Services.AddScoped<IIdentitySharedService, IdentitySharedService>();
+
+builder.Services.AddHttpContextAccessor();
 
 
 builder.Services.AddDbContext<OrderDbContext>(options =>
@@ -54,6 +64,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
