@@ -6,8 +6,8 @@ public sealed class Order
     public Guid BuyerId { get; set; }
     public DateTime CreatedAt { get; set; }= DateTime.Now;
     public List<OrderItem> OrderItems { get; set; }
-    public decimal TotalPrice { get; set; }
-    public StatusEnum Statu { get; set; }
+    public decimal TotalPrice => OrderItems.Sum(x => x.Price * x.Quantity);
+    public StatusEnum Statu { get; set; }= StatusEnum.Active;
 
     public Order()
     {
@@ -16,6 +16,6 @@ public sealed class Order
 }
 public enum StatusEnum
 {
-    Active,
+    Active=1,
     Cancelled
 }

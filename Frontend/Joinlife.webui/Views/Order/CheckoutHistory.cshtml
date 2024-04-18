@@ -1,0 +1,48 @@
+﻿@using Joinlife.webui.Controllers
+@{
+    ViewBag.Title = "Sipariş geçmişi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<OrderViewModel>
+
+
+<div class="page-title">
+    <h1>Sipariş geçmişi</h1>
+    <div class="row">
+        <div class="col-md-6 offset-3">
+
+            @if (Model.Count > 0)
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Sipariş No</th>
+                            <th scope="col">Tarih</th>
+                            <th scope="col">Toplam</th>
+                            <th scope="col">Durum</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.CreatedAt</td>
+                                <td>@item.OrderItems.Sum(x=>x.Price*x.Quantity)</td>
+                                <td>@item.Statu</td>
+                                <td><a asp-controller="Order" asp-action="Detail" asp-route-id="@item.Id">Detay</a></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else{
+                <div class="alert alert-warning" role="alert">
+                    Henüz sipariş geçmişiniz bulunmamaktadır.
+                </div>
+            }
+
+        </div>
+    </div>
+</div>

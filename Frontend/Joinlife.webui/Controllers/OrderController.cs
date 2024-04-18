@@ -17,9 +17,9 @@ public class OrderController : Controller
         _basketService = basketService;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> CheckoutHistory()
     {
-        return View(await _orderService.GetAllAsync());
+        return View(await _orderService.GetCheckoutHistory());
     }
 
     public async Task<IActionResult> Checkout()
@@ -35,8 +35,9 @@ public class OrderController : Controller
         return RedirectToAction("Index","Home");
     }
 
-    public async Task<IActionResult> OrderDetail(Guid id)
+    public async Task<IActionResult> Detail(Guid id)
     {
-        return View();
+        var orderViewModel = await _orderService.GetByIdAsync(id);
+        return View(orderViewModel);
     }
 }
