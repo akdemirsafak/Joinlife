@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Order Detail";
+}
+@model OrderViewModel
+
+
+<div class="row">
+
+    <div class="col-md-8 offset-2">
+        <div class="card">
+            <div class="card-title h5">@Model.Id nolu Siparişin ayrıntıları :</div>
+        <div class="card-body">
+               <div class="card-subtitle m-3">
+                   Sipariş Tarihi : @Model.CreatedAt tarihinde oluşturuldu.
+                   Sipariş Tutarı : @Model.TotalPrice TL
+                   Sipariş : @Model.OrderItems.Count adet ürün içeriyor.
+                   </div>
+                   <div class="card-body">
+                   <ul>
+                        @foreach (var item in Model.OrderItems)
+                        {
+                            <li>
+                              Etkinlik Id :@item.EventId - Etkinlik  Adı : @item.EventName - BiletId: @item.TicketId - Bilet Türü :  @item.TicketName - Fiyat :  @item.Price - Adet : @item.Quantity
+                            </li>
+                        }
+
+                   </ul>
+                         
+               </div>
+        </div>
+
+        </div>
+     </div>
+
+</div>

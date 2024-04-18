@@ -22,6 +22,7 @@ namespace AuthServer
             new ApiResource("gateway_resource"){Scopes={"gateway_fullpermission"}},
             new ApiResource("fileapi_resource"){Scopes={"fileapi_fullpermission"}},
             new ApiResource("payment_resource"){Scopes={"payment_fullpermission"}},
+            new ApiResource("order_resource"){Scopes={"order_fullpermission"}}
         
         };
 
@@ -46,7 +47,8 @@ namespace AuthServer
                 new ApiScope("gateway_fullpermission","Gateway'e request için full yetki."),
                 new ApiScope("fileapi_fullpermission","FileApi'a request için full yetki."),
                 new ApiScope("payment_fullpermission","Payment'a request için full yetki."),
-                new ApiScope("basket_fullpermission","Basket'e request için full yetki.")
+                new ApiScope("basket_fullpermission","Basket'e request için full yetki."),
+                new ApiScope("order_fullpermission","Order'a request için full yetki.")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -64,7 +66,6 @@ namespace AuthServer
                         "event_fullpermission",
                         "gateway_fullpermission",
                         "fileapi_fullpermission",
-                        "payment_fullpermission",
                         IdentityServerConstants.LocalApi.ScopeName //Bu scope'da belirlediğimiz clientId ve Secret ile hangi api'lara istek yapılabileceğini burada belirtiyoruz.
                     },
                     AccessTokenLifetime=30*24*60*60 //30 gün
@@ -83,6 +84,7 @@ namespace AuthServer
                         "gateway_fullpermission",
                         "fileapi_fullpermission",
                         "payment_fullpermission",
+                        "order_fullpermission",
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,

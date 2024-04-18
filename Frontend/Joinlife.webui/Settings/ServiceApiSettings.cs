@@ -10,6 +10,7 @@
         public ServiceApi Ticket { get; set; }
         public ServiceApi File { get; set; }
         public ServiceApi Basket { get; set; }
+        public ServiceApi Payment { get; set; }
     }
     public class ServiceApi
     {

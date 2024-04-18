@@ -2,6 +2,7 @@ using Mapster;
 using Order.Domain.Models;
 using Order.Domain.Repositories;
 using Order.Domain.Services;
+using SharedLib.Auth;
 using SharedLib.Dtos;
 
 namespace Order.Service.Services
@@ -9,10 +10,13 @@ namespace Order.Service.Services
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository _orderRepository;
+        private readonly IIdentitySharedService _identitySharedService;
 
-        public OrderService(IOrderRepository orderRepository)
+        public OrderService(IOrderRepository orderRepository, 
+            IIdentitySharedService identitySharedService)
         {
             _orderRepository = orderRepository;
+            _identitySharedService = identitySharedService;
         }
 
         public async Task<AppResponse<CreatedOrderResponse>> CreateAsync(CreateOrderRequest request)
@@ -27,21 +31,21 @@ namespace Order.Service.Services
             };
             request.OrderItems.ForEach(orderItem => order.OrderItems.Add(
                 new Domain.Entity.OrderItem { 
-                    Amount=orderItem.Amount,
+                    Quantity=orderItem.Quantity,
                     Price=orderItem.Price,
                     TicketId=orderItem.TicketId,
                     TicketName=orderItem.TicketName
                 }));
-            order.TotalPrice= order.OrderItems.Sum(item => item.Price * item.Amount);
+            //order.TotalPrice= order.OrderItems.Sum(item => item.Price * item.Quantity);
             // !  order.BuyerId = request.BuyerId; // TODO CurrentUserId
-            await _orderRepository.CreateAsync(order);
+            var created=await _orderRepository.CreateAsync(order);
 
             return AppResponse<CreatedOrderResponse>.Success(order.Adapt<CreatedOrderResponse>(),201);
         }
 
         public async Task<AppResponse<List<GetOrderResponse>>> GetAllAsync()
         {
-            var orders = await _orderRepository.GetAllAsync();
+            var orders = await _orderRepository.GetAsync(x=>x.BuyerId==Guid.Parse(_identitySharedService.GetUserId));
             return AppResponse<List<GetOrderResponse>>.Success(orders.Adapt<List<GetOrderResponse>>(),200);
         }
 

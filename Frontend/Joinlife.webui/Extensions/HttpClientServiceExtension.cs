@@ -56,8 +56,6 @@ public static class HttpClientServiceExtension
             opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}/{serviceApiSettings.Event.Path}");
         }).AddHttpMessageHandler<ClientCredentialTokenHandler>();
         
-
-
         services.AddHttpClient<IOrderService, OrderService>(opt =>
         {
             opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}/{serviceApiSettings.Order.Path}");
@@ -71,6 +69,11 @@ public static class HttpClientServiceExtension
         services.AddHttpClient<IBasketService, BasketService>(opt =>
         {
             opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}/{serviceApiSettings.Basket.Path}");
+        }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+        services.AddHttpClient<IPaymentService, PaymentService>(opt =>
+        {
+            opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}/{serviceApiSettings.Payment.Path}");
         }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
     }

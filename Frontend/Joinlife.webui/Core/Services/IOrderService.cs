@@ -1,6 +1,11 @@
-﻿namespace Joinlife.webui.Core.Services
+﻿using Joinlife.webui.ViewModels.Orders;
+
+namespace Joinlife.webui.Core.Services;
+
+public interface IOrderService
 {
-    public interface IOrderService
-    {
-    }
+    Task<List<OrderViewModel>> GetCheckoutHistory();
+    Task<OrderViewModel> GetByIdAsync(Guid id);
+    Task<OrderViewModel> CreateAsync(CheckoutInfoInput input);
+    Task CancelOrder(Guid id);
 }

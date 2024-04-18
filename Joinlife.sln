@@ -35,7 +35,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer", "AuthServer\Au
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "File.API", "Services\File\File.API\File.API.csproj", "{8D9B87F2-F386-4204-B7BF-16C8AB67DF4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Basket.API", "Services\Basket\Basket.API\Basket.API.csproj", "{78B97C78-CAED-41B2-BFAF-1E240A1D7C91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.API", "Services\Basket\Basket.API\Basket.API.csproj", "{78B97C78-CAED-41B2-BFAF-1E240A1D7C91}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.API", "Services\Payment\Payment.API\Payment.API.csproj", "{9B15769E-E340-49F8-B2CF-17E7AA218ABE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,10 @@ Global
 		{78B97C78-CAED-41B2-BFAF-1E240A1D7C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78B97C78-CAED-41B2-BFAF-1E240A1D7C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78B97C78-CAED-41B2-BFAF-1E240A1D7C91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B15769E-E340-49F8-B2CF-17E7AA218ABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B15769E-E340-49F8-B2CF-17E7AA218ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B15769E-E340-49F8-B2CF-17E7AA218ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B15769E-E340-49F8-B2CF-17E7AA218ABE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
