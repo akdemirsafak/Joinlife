@@ -76,5 +76,10 @@ public static class HttpClientServiceExtension
             opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}/{serviceApiSettings.Payment.Path}");
         }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
+        services.AddHttpClient<INotificationService, NotificationService>(opt =>
+        {
+            opt.BaseAddress = new Uri($"{serviceApiSettings.GatewayUrl}/{serviceApiSettings.Notification.Path}");
+        }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
     }
 }

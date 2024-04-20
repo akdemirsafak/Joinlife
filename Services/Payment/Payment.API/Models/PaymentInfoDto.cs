@@ -2,6 +2,7 @@
 
 public class PaymentInfoDto
 {
+    public string Email { get; set; }
     public string CardName { get; set; }
     public string CardNumber { get; set; }
     public string ExpirationDate { get; set; }

@@ -7,5 +7,4 @@ public interface IOrderService
     Task<List<OrderViewModel>> GetCheckoutHistory();
     Task<OrderViewModel> GetByIdAsync(Guid id);
     Task<OrderViewModel> CreateAsync(CheckoutInfoInput input);
-    Task CancelOrder(Guid id);
 }

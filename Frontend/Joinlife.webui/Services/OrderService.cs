@@ -28,15 +28,10 @@ public class OrderService : IOrderService
         _paymentService = paymentService;
         _httpContextAccessor = httpContextAccessor;
     }
-
-    public Task CancelOrder(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<OrderViewModel> CreateAsync(CheckoutInfoInput input)
     {
-        var userId = _httpContextAccessor.HttpContext.User.FindFirstValue("sub");
+        
+        var userMail = _httpContextAccessor.HttpContext.User.FindFirstValue("email");
         var basket = await _basketService.GetAsync();
         var order = new CreateOrderInput
         {
@@ -59,6 +54,7 @@ public class OrderService : IOrderService
 
         var paymentInfo=new PaymentInfoInput
         {
+            Email=userMail,
             TotalPrice = basket.TotalPrice,
             CardName = input.CardName,
             CardNumber = input.CardNumber,
