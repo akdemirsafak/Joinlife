@@ -119,6 +119,23 @@
         "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
         "AllowedScopes": [ "payment_fullpermission" ]
       }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/services/notification/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "notification_fullpermission" ]
+      }
     }
 
   ],

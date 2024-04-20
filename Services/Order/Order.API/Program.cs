@@ -1,6 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using System.Reflection;
-using MassTransit;
+﻿using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -12,7 +10,8 @@ using Order.Repository.Repositories;
 using Order.Service.Consumers;
 using Order.Service.Services;
 using SharedLib.Auth;
-using SharedLib.Messages;
+using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -62,14 +61,13 @@ builder.Services.AddMassTransit(setting =>
     //Default port :5672
     setting.UsingRabbitMq((context, configuration) =>
     {
-        configuration.Host(builder.Configuration["RabbitMq:Host"], "/", host =>
+        configuration.Host(builder.Configuration["Rabbitmq:Host"], "/", host =>
         {
-            host.Username(builder.Configuration["RabbitMq:Username"]);
-            host.Password(builder.Configuration["RabbitMq:Password"]);
+            host.Username(builder.Configuration["Rabbitmq:Username"]);
+            host.Password(builder.Configuration["Rabbitmq:Password"]);
         });
         configuration.ReceiveEndpoint("create-order-service", e =>
         {
-
             e.ConfigureConsumer<CreateOrderMessageCommandConsumer>(context);
         });
     });

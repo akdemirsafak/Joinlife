@@ -2,16 +2,16 @@ using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Payment.API.Services;
+using Notification.API.Consumers;
+using Notification.API.Services;
+using Notification.API.Settings;
 using SharedLib.Auth;
-using SharedLib.Messages;
 using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
-
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IIdentitySharedService, IdentitySharedService>();
 var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 
@@ -22,39 +22,39 @@ builder.Services.AddAuthentication(opt =>
 }).AddJwtBearer(opt =>
 {
     opt.Authority = builder.Configuration["IdentityServerURL"];
-    opt.Audience = "payment_resource";
+    opt.Audience = "notification_resource";
     opt.RequireHttpsMetadata = true;
 });
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<IIdentitySharedService, IdentitySharedService>();
-builder.Services.AddScoped<IPaymentService, PaymentService>();
 
-builder.Services.AddMassTransit(x =>
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<INotificationService, NotificationService>();
+
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+
+builder.Services.AddMassTransit(options =>
 {
-    // Default Port : 5672
-    x.UsingRabbitMq((context, cfg) =>
+    options.AddConsumer<CreateOrderNotificationMessageCommandConsumer>();
+    options.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(builder.Configuration["Rabbitmq:Host"], "/", host =>
         {
             host.Username(builder.Configuration["Rabbitmq:Username"]);
             host.Password(builder.Configuration["Rabbitmq:Password"]);
         });
+        cfg.ReceiveEndpoint("create-order-notification-service", e =>
+        {
+            e.ConfigureConsumer<CreateOrderNotificationMessageCommandConsumer>(context);
+        });
     });
-    EndpointConvention.Map<CreateOrderNotificationMessageCommand>(new Uri("queue:create-order-notification-service"));
-    EndpointConvention.Map<CreateOrderMessageCommand>(new Uri("queue:create-order-service"));
-   
+
 });
+
 builder.Services.AddControllers(opt =>
 {
-    opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));//
+    opt.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
 });
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-
-
 
 var app = builder.Build();
 

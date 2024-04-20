@@ -56,12 +56,12 @@ namespace AuthServer
 
                         if(!userManager.Users.Any())
                         {
-                            IdentityResult result= userManager.CreateAsync(
+                            userManager.CreateAsync(
                                 new ApplicationUser
                                 {
                                     UserName= "admin",
                                     Email="admin@default.com"
-                                },"Password-1234").Result;
+                                },"Password-1234").Wait();
                         }
                     }
                     catch (Exception ex)

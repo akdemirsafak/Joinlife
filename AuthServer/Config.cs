@@ -22,8 +22,8 @@ namespace AuthServer
             new ApiResource("gateway_resource"){Scopes={"gateway_fullpermission"}},
             new ApiResource("fileapi_resource"){Scopes={"fileapi_fullpermission"}},
             new ApiResource("payment_resource"){Scopes={"payment_fullpermission"}},
-            new ApiResource("order_resource"){Scopes={"order_fullpermission"}}
-        
+            new ApiResource("order_resource"){Scopes={"order_fullpermission"}},
+            new ApiResource("notification_resource"){Scopes={"notification_fullpermission"}}
         };
 
 
@@ -48,7 +48,8 @@ namespace AuthServer
                 new ApiScope("fileapi_fullpermission","FileApi'a request için full yetki."),
                 new ApiScope("payment_fullpermission","Payment'a request için full yetki."),
                 new ApiScope("basket_fullpermission","Basket'e request için full yetki."),
-                new ApiScope("order_fullpermission","Order'a request için full yetki.")
+                new ApiScope("order_fullpermission","Order'a request için full yetki."),
+                new ApiScope("notification_fullpermission","Notification'a request için full yetki.")
             };
 
         public static IEnumerable<Client> Clients =>
@@ -85,6 +86,7 @@ namespace AuthServer
                         "fileapi_fullpermission",
                         "payment_fullpermission",
                         "order_fullpermission",
+                        "notification_fullpermission",
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,

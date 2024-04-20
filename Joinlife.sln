@@ -37,7 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "File.API", "Services\File\F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basket.API", "Services\Basket\Basket.API\Basket.API.csproj", "{78B97C78-CAED-41B2-BFAF-1E240A1D7C91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.API", "Services\Payment\Payment.API\Payment.API.csproj", "{9B15769E-E340-49F8-B2CF-17E7AA218ABE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Payment.API", "Services\Payment\Payment.API\Payment.API.csproj", "{9B15769E-E340-49F8-B2CF-17E7AA218ABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.API", "Services\Notification\Notification.API\Notification.API.csproj", "{D4CD1B1A-2D24-4C0A-AD9E-1AB8522CC8DE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +119,10 @@ Global
 		{9B15769E-E340-49F8-B2CF-17E7AA218ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9B15769E-E340-49F8-B2CF-17E7AA218ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B15769E-E340-49F8-B2CF-17E7AA218ABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4CD1B1A-2D24-4C0A-AD9E-1AB8522CC8DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4CD1B1A-2D24-4C0A-AD9E-1AB8522CC8DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4CD1B1A-2D24-4C0A-AD9E-1AB8522CC8DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4CD1B1A-2D24-4C0A-AD9E-1AB8522CC8DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
