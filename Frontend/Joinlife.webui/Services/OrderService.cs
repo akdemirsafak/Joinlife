@@ -30,7 +30,7 @@ public class OrderService : IOrderService
     }
     public async Task<OrderViewModel> CreateAsync(CheckoutInfoInput input)
     {
-        
+        var userId= _httpContextAccessor.HttpContext.User.FindFirstValue("sub");
         var userMail = _httpContextAccessor.HttpContext.User.FindFirstValue("email");
         var basket = await _basketService.GetAsync();
         var order = new CreateOrderInput
