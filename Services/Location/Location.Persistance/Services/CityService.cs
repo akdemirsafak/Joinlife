@@ -1,4 +1,4 @@
-﻿using Location.Application.Mapping;
+﻿using Location.Persistance.Mapping;
 using Location.Application.Services;
 using Location.Domain.Entities;
 using Location.Domain.Models.Request.Cities;
@@ -29,7 +29,6 @@ public sealed class CityService : ICityService
         var country = await _countryRepository.GetAsync(x => x.Id == request.CountryId);
         var city = cityMapper.CreateCityRequestToCity(request);
         city.Country = country;
-        city.CreatedAt = DateTime.Now;
 
         await _cityRepository.CreateAsync(city);
         await _unitOfWork.SaveChangesAsync();
@@ -63,7 +62,7 @@ public sealed class CityService : ICityService
         var city= await _cityRepository.GetAsync(x=>x.Id==id);
         city.Name = request.Name;
         city.Country = country;
-        city.UpdatedAt = DateTime.Now;
+        city.ImageUrl = request.ImageUrl;
         await _cityRepository.UpdateAsync(city);
         await _unitOfWork.SaveChangesAsync();
         return cityMapper.CityToUpdatedCityResponse(city);

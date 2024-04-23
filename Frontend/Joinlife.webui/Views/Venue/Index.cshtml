@@ -1,4 +1,4 @@
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
 @model List<GetVenueResponse>
@@ -6,27 +6,28 @@
 
 
 <div class="row">
-    <div class="col-md-12">
-        <div>
-            <a asp-action="Create" class="btn btn-primary">Create New</a>
-        </div>
-        @if (!Model.Any())
+    <div class="my-1">
+        <a asp-action="Create" class="btn btn-primary">Ekle</a>
+    </div>
+    @if (!Model.Any())
+    {
+        <div class="jumbotron text-center">Etkinlik alanı bulunamadı.</div>
+    }
+    else
+    {
+        @foreach (var venue in Model)
         {
-            <div class="jumbotron text-center">No venues found.</div>
-        }
-        else
-        {
-            @foreach (var venue in Model)
-            {
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title"><a asp-action="Detail" asp-route-id='@venue.Id'>@venue.Name </a></h4>
-                        <p>@venue.Line</p>
-                        <h6>@venue.CityName</h6>
-
+            <div class="col-md-4 mt-3 col-sm-6 col-lg-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="@venue.ImageUrl" class="card-img-top" style="max-height:128px" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@venue.Name</h5>
+                        <h5 class="card-title">@venue.City.Name</h5>
+                        <p>Bu mekan @venue.Capacity kişiyi ağırlayabilir.</p>
+                        <a asp-action="Detail" asp-route-id='@venue.Id' class="btn btn-primary">Detaylar</a>
                     </div>
                 </div>
-            }
+            </div>
         }
-    </div>
+    }
 </div>

@@ -22,4 +22,10 @@ public class PhotoStockController : CustomBaseController
         var imageLink = await _imageService.UploadImageAsync(photo, containerName);
         return CreateActionResult(AppResponse<string>.Success(imageLink));
     }
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromQuery] string fileName, [FromQuery] string containerName)
+    {
+        var result = await _imageService.DeleteImageAsync(fileName, containerName);
+        return CreateActionResult(AppResponse<bool>.Success(result));
+    }
 }

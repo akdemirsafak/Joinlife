@@ -1,5 +1,6 @@
 using Joinlife.webui.Core.Services;
 using Joinlife.webui.Models.VenueDtos;
+using Joinlife.webui.Utilities;
 using SharedLib.Dtos;
 
 namespace Joinlife.webui.Services;
@@ -7,14 +8,18 @@ namespace Joinlife.webui.Services;
 public class VenueService : IVenueService
 {
     private readonly HttpClient _httpClient;
+    private readonly IFileService _fileService;
     //Service Requests
-    public VenueService(HttpClient httpClient)
+    public VenueService(HttpClient httpClient, IFileService fileService)
     {
         _httpClient = httpClient;
+        _fileService = fileService;
     }
 
     public async Task CreateAsync(CreateVenueInput input)
     {
+        var imageUrl = await _fileService.UploadImageAsync(input.Image, containerName: ContainerNames.Venue);
+        input.ImageUrl = imageUrl;
         var clientResult = await _httpClient.PostAsJsonAsync("venue", input);
         if (!clientResult.IsSuccessStatusCode)
         {
@@ -56,6 +61,10 @@ public class VenueService : IVenueService
 
     public async Task UpdateAsync(UpdateVenueInput input)
     {
+
+        var imageUrl = await _fileService.UploadImageAsync(input.Image, containerName: ContainerNames.Venue);
+        input.ImageUrl = imageUrl;
+
         var clientResult = await _httpClient.PutAsJsonAsync($"venue/{input.Id}", input);
 
         if (!clientResult.IsSuccessStatusCode)

@@ -9,4 +9,6 @@ public class CreateCountryInput
     [MinLength(2,ErrorMessage ="2 ile 32 karakter arasında bir isim belirlemelisiniz.")]
     [MaxLength(32,ErrorMessage ="2 ile 32 karakter arasında bir isim belirlemelisiniz.")]
     public string Name { get; set; }
+    public IFormFile? Image { get; set; }
+    public string? ImageUrl { get; set; }
 }

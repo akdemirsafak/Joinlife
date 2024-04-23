@@ -10,7 +10,9 @@ namespace Event.API.Mapping
         {
             CreateMap<Eventy, GetEventReponse>()
                 .ForMember(dest => dest.EventTypeId, src => src.MapFrom(prop => (int)prop.Type))
-                .ForMember(dest => dest.EventType, src => src.MapFrom(prop => prop.Type));
+                .ForMember(dest => dest.EventType, src => src.MapFrom(prop => prop.Type))
+                .ForMember(dest => dest.Statu, src => src.MapFrom(prop => prop.Statu.ToString()))
+                .ForMember(dest => dest.StatuId, src => src.MapFrom(prop => (int)prop.Statu));
 
             CreateMap<Eventy, GetEventByIdResponse>()
          .ForMember(dest => dest.EventTypeId, src => src.MapFrom(prop => (int)prop.Type))

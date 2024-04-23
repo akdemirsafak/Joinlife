@@ -15,6 +15,10 @@ namespace Location.Persistance.Configurations
             builder.Property(x => x.Line)
                 .IsRequired()
                 .HasMaxLength(256);
+
+            builder.Property(x => x.Capacity)
+                .IsRequired();
+                
         }
     }
 }

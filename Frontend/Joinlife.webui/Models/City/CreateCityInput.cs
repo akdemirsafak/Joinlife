@@ -10,4 +10,6 @@ public sealed class CreateCityInput
     [Length(2,32,ErrorMessage ="Şehir adı 2 ila 32 karakter arası olmalıdır.")]
     public string Name { get; set; }
     public Guid CountryId { get; set; }
+    public IFormFile? Image { get; set; }
+    public string? ImageUrl { get; set; }
 }

@@ -3,7 +3,7 @@ using Location.Domain.Models.Request.Cities;
 using Location.Domain.Models.Response.Cities;
 using Riok.Mapperly.Abstractions;
 
-namespace Location.Application.Mapping;
+namespace Location.Persistance.Mapping;
 
 [Mapper]
 public partial class CityMapper

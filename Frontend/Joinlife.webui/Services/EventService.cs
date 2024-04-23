@@ -1,5 +1,6 @@
 using Joinlife.webui.Core.Services;
 using Joinlife.webui.Models.EventDtos;
+using Joinlife.webui.Utilities;
 using SharedLib.Dtos;
 
 namespace Joinlife.webui.Services;
@@ -17,7 +18,7 @@ public sealed class EventService : IEventService
 
     public async Task CreateAsync(CreateEventInput input)
     {
-        var imageUrl= await _fileService.UploadImageAsync(input.Image,"event");
+        var imageUrl= await _fileService.UploadImageAsync(input.Image,containerName:ContainerNames.Event);
         input.ImageUrl = imageUrl;
 
         var clientResult = await _httpClient.PostAsJsonAsync("event", input);

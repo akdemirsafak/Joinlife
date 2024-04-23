@@ -7,5 +7,7 @@ public sealed class UpdatedVenueResponse
     public Guid Id { get; set; }
     public string Name { get; set; }
     public string Line { get; set; }
+    public string? ImageUrl { get; set; }
+    public int Capacity { get; set; }
     public GetCityResponse City { get; set; }
 }

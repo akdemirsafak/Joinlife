@@ -1,4 +1,4 @@
-using Location.Application.Mapping;
+using Location.Persistance.Mapping;
 using Location.Application.Services;
 using Location.Domain.Entities;
 using Location.Domain.Models.Request.Venue;
@@ -33,6 +33,8 @@ public class VenueService : IVenueService
         {
             Name = request.Name,
             Line = request.Line,
+            ImageUrl = request.ImageUrl,
+            Capacity= request.Capacity,
             City = city
         };
         await _venueRepository.CreateAsync(entity);
@@ -74,9 +76,10 @@ public class VenueService : IVenueService
 
         venue.Name = request.Name;
         venue.Line = request.Line;
+        venue.Capacity = request.Capacity;
         venue.City = city;
-        venue.UpdatedAt = DateTime.Now;
-       
+        venue.ImageUrl = request.ImageUrl;
+
         await _venueRepository.UpdateAsync(venue);
         await _unitOfWork.SaveChangesAsync();
         

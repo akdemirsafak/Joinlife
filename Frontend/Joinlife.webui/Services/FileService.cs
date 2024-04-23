@@ -37,4 +37,13 @@ public sealed class FileService : IFileService
         var fileName = fileContent.Data;
         return fileName;
     }
+    public async Task<bool> DeleteImageAsync(string fileName, string containerName)
+    {
+        var clientResponse = await _httpClient.DeleteAsync($"photostock?fileName={fileName}&containerName={containerName}");
+        if (!clientResponse.IsSuccessStatusCode)
+        {
+            throw new Exception("delete image failed.");
+        }
+        return true;
+    }
 }
