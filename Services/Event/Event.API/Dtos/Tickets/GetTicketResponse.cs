@@ -8,5 +8,7 @@ public class GetTicketResponse
     public string Name { get; set; }
     public decimal Price { get; set; }
     public Guid EventId { get; set; }
-    public virtual GetEventReponse Event { get; set; }
+    public string EventName { get; set; }
+    public string EventImageUrl { get; set; }
+    //public virtual GetEventReponse Event { get; set; }
 }

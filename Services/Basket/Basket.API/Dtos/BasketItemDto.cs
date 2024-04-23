@@ -7,5 +7,6 @@ public class BasketItemDto
     public string TicketName { get; set; }
     public string EventId { get; set; }
     public string EventName { get; set; }
+    public string EventImageUrl { get; set; }
     public decimal Price { get; set; }
 }

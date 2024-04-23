@@ -29,7 +29,8 @@ public class BasketController : Controller
             TicketId=ticket.Id,
             TicketName=ticket.Name,
             EventId=ticket.EventId,
-            EventName=ticket.Event.Name,
+            EventName=ticket.EventName,
+            EventImageUrl=ticket.EventImageUrl,
             Price=ticket.Price
         };
         await _basketService.AddBasketItemAsync(basketItem);
