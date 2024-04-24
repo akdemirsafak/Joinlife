@@ -3,6 +3,7 @@ using Event.API.Core;
 using Event.API.Dtos.Events;
 using Event.API.Dtos.Tickets;
 using Event.API.Entities;
+using SharedLib.Common;
 using SharedLib.Dtos;
 
 namespace Event.API.Services;

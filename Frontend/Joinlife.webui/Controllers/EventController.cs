@@ -1,9 +1,9 @@
-using Joinlife.webui.Common;
 using Joinlife.webui.Core.Services;
 using Joinlife.webui.Mappers;
 using Joinlife.webui.Models.EventDtos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using SharedLib.Common;
 
 namespace Joinlife.webui.Controllers;
 
