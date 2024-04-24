@@ -1,4 +1,6 @@
-﻿namespace Event.API.Entities;
+﻿using SharedLib.Common;
+
+namespace Event.API.Entities;
 
 public class Eventy
 {
@@ -22,22 +24,4 @@ public class Eventy
         Tickets = new List<Tickety>();
     }
 }
-public enum EventTypeEnum
-{
-    Concert = 1,
-    Festival,
-    Party,
-    Sport,
-    Comedy,
-    Workshop,
-    Opera,
-    Other
-}
 
-public enum EventStatusEnum
-{
-    Active = 1,
-    Cancelled,
-    Postpone,
-    Finished
-}
