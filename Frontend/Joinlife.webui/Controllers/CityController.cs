@@ -49,7 +49,8 @@ public class CityController : Controller
         {
             Id = cityResponse.Id,
             Name = cityResponse.Name,
-            CountryId = cityResponse.Country.Id
+            CountryId = cityResponse.Country.Id,
+            ImageUrl = cityResponse.ImageUrl
         };
         return View(updateCityResponse);
     }

@@ -41,8 +41,9 @@ public class CountryController : Controller
         var countryResponse = await _countryService.GetByIdAsync(id);
         var updateCountryInputModel = new UpdateCountryInput
         {
-            Id=countryResponse.Id,
-            Name=countryResponse.Name
+            Id = countryResponse.Id,
+            Name = countryResponse.Name,
+            ImageUrl = countryResponse.ImageUrl
         };
         return View(updateCountryInputModel);
     }

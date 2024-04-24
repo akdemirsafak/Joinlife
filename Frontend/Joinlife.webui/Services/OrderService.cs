@@ -80,7 +80,7 @@ public class OrderService : IOrderService
         
         if (!clientResponse.IsSuccessStatusCode)
         {
-            throw new Exception("Cannot retrieve orders");
+            throw new Exception("Sipariş geçmişi getilirken bir problem yaşandı.");
         }
         var content= await clientResponse.Content.ReadFromJsonAsync<AppResponse<List<OrderViewModel>>>();
         return content.Data;
@@ -90,7 +90,7 @@ public class OrderService : IOrderService
     {
         var clientResponse = await _client.GetAsync($"order/{id}");
         if (!clientResponse.IsSuccessStatusCode)
-            throw new Exception("Cannot retrieve order");
+            throw new Exception("Sipariş görüntülenemiyor.");
         var content = await clientResponse.Content.ReadFromJsonAsync<AppResponse<OrderViewModel>>();
         return content.Data;
     }

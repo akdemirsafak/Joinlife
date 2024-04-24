@@ -36,7 +36,34 @@ public class EventService : IEventService
     public async Task<AppResponse<List<GetEventReponse>>> GetAllAsync()
     {
         var events = await _eventRepository.GetAllAsync();
-        var responseModel = _mapper.Map<List<GetEventReponse>>(events);
+
+
+        var responseModel = new List<GetEventReponse>();
+
+        foreach (var organization in events)
+        {
+            responseModel.Add(new GetEventReponse
+            {
+                Id = organization.Id,
+                Name = organization.Name,
+                Description = organization.Description,
+                EventType = organization.Type.ToString(),
+                EventTypeId = (int)organization.Type,
+                ImageUrl = organization.ImageUrl,
+                VenueId = organization.VenueId,
+                StatuId = (int)organization.Statu,
+                Statu = organization.Statu.ToString(),
+                StartDateTime = organization.StartDateTime,
+                EndDateTime = organization.EndDateTime,
+                Tickets = organization.Tickets.Select(x => new EventTickets
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Price = x.Price
+                }).ToList()
+            });
+        }
+        //var responseModel = _mapper.Map<List<GetEventReponse>>(events);
         return AppResponse<List<GetEventReponse>>.Success(responseModel, 200);
     }
 
@@ -80,6 +107,7 @@ public class EventService : IEventService
         entity.EndDateTime = request.EndDateTime;
         entity.Statu = (EventStatusEnum)request.StatuId;
         entity.Type = (EventTypeEnum)request.EventTypeId;
+        entity.ImageUrl= request.ImageUrl;
         entity.UpdatedAt = DateTime.Now;
 
         await _eventRepository.UpdateAsync(entity);

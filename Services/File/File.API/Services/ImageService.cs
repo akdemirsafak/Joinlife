@@ -12,6 +12,14 @@ public class ImageService : IImageService
         _blobServiceClient = blobServiceClient;
     }
 
+    public async Task<bool> DeleteImageAsync(string fileName, string containerName)
+    {
+        var blobContainter=_blobServiceClient.GetBlobContainerClient(containerName);
+        BlobClient file = blobContainter.GetBlobClient(fileName);
+        await file.DeleteIfExistsAsync();
+        return true;
+    }
+
     public async Task<string> UploadImageAsync(IFormFile file, string containerName)
     {
         // Get the Blob container

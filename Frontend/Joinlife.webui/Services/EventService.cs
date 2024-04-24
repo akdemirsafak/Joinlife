@@ -1,5 +1,6 @@
-using Joinlife.webui.Core.Services;
+﻿using Joinlife.webui.Core.Services;
 using Joinlife.webui.Models.EventDtos;
+using Joinlife.webui.Utilities;
 using SharedLib.Dtos;
 
 namespace Joinlife.webui.Services;
@@ -17,14 +18,14 @@ public sealed class EventService : IEventService
 
     public async Task CreateAsync(CreateEventInput input)
     {
-        var imageUrl= await _fileService.UploadImageAsync(input.Image,"event");
+        var imageUrl= await _fileService.UploadImageAsync(input.Image,containerName:ContainerNames.Event);
         input.ImageUrl = imageUrl;
 
         var clientResult = await _httpClient.PostAsJsonAsync("event", input);
 
         if (!clientResult.IsSuccessStatusCode)
         {
-            throw new Exception("Could not create event");
+            throw new Exception("Etkinlik oluşturulamadı.");
         }
         var result = await clientResult.Content.ReadFromJsonAsync<AppResponse<GetEventResponse>>();
     }
@@ -34,7 +35,7 @@ public sealed class EventService : IEventService
         var clientResult = await _httpClient.DeleteAsync($"event/{id}");
         if (!clientResult.IsSuccessStatusCode)
         {
-            throw new Exception("Country cannot delete.");
+            throw new Exception("Etkinlik silinemedi.");
         }
     }
 
@@ -55,10 +56,12 @@ public sealed class EventService : IEventService
 
     public async Task UpdateAsync(UpdateEventInput input)
     {
+        var imageUrl= await _fileService.UploadImageAsync(input.Image,containerName:ContainerNames.Event);
+        input.ImageUrl = imageUrl;
         var clientResult = await _httpClient.PutAsJsonAsync($"event/{input.Id}", input);
         if (!clientResult.IsSuccessStatusCode)
         {
-            throw new Exception("Country cannot update.");
+            throw new Exception("Etkinlik güncellenemedi.");
         }
     }
 }

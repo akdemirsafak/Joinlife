@@ -6,6 +6,8 @@ public sealed class Venue : BaseEntity, IAuditableEntity
 {
     public string Name { get; set; } = null!;
     public string? Line { get; set; }
+    public int Capacity { get; set; }
+    public string? ImageUrl { get; set; }
     public City City { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? UpdatedAt { get; set; }

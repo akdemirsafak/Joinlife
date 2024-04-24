@@ -8,8 +8,8 @@
         <div class="col-md-6 offset-3">
             <div class="card">
                 <div class="card-body">
-                    <h3>@Model.Name</h3>
-                    <h5>From @Model.Name</h5>
+                    <h3>@Model.Name, @Model.Country.Name</h3>
+                    <img src="@Model.ImageUrl" alt="Image" class="img-fluid"/>
                 </div>
                 <div class="card-footer">
                     <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-warning">Güncelle</a>

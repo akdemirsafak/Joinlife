@@ -1,4 +1,4 @@
-﻿using Location.Application.Mapping;
+﻿using Location.Persistance.Mapping;
 using Location.Application.Services;
 using Location.Domain.Entities;
 using Location.Domain.Models.Request.Countries;
@@ -35,6 +35,7 @@ public sealed class CountryService : ICountryService
     {
         var entity = await _countryRepository.GetAsync(x => x.Id == id);
         await _countryRepository.DeleteAsync(entity);
+        await _unitOfWork.SaveChangesAsync();
     }
 
     public async Task<List<GetCountryResponse>> GetAllAsync()
@@ -54,7 +55,8 @@ public sealed class CountryService : ICountryService
         var country = new Country()
         {
             Id = id,
-            Name = request.Name
+            Name = request.Name,
+            ImageUrl = request.ImageUrl
         };
         await _countryRepository.UpdateAsync(country);
         await _unitOfWork.SaveChangesAsync();

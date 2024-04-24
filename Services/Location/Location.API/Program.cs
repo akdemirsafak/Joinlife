@@ -3,6 +3,7 @@ using Location.Application;
 using Location.Application.Behaviors;
 using Location.Application.Services;
 using Location.Persistance.DbContexts;
+using Location.Persistance.Interceptors;
 using Location.Persistance.Repositories;
 using Location.Persistance.Services;
 using Location.Persistance.UnitOfWorks;
@@ -43,13 +44,19 @@ builder.Services.AddMediatR(cfg =>
 });
 
 string mssqlConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
-builder.Services.AddDbContext<LocationDbContext>(opt =>
+
+
+builder.Services.AddSingleton<AuditInterceptor>();
+
+builder.Services.AddDbContext<LocationDbContext>((sp,opt) =>
 {
+    var auditInterceptor=sp.GetService<AuditInterceptor>()!;
     opt.UseSqlServer(mssqlConnectionString,
         option =>
         {
             option.MigrationsAssembly(Assembly.GetAssembly(typeof(LocationDbContext))!.GetName().Name);
         });
+    opt.AddInterceptors(auditInterceptor);
 });
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -63,7 +70,7 @@ builder.Services.AddScoped<IVenueService, VenueService>();
 builder.Services.AddValidatorsFromAssembly(typeof(ApplicationAssemblyReference).Assembly);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

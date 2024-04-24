@@ -10,9 +10,10 @@
         <div class="col-md-6 offset-3">
             <div class="card">
                 <div class="card-body">
-                    <h5>@Model.Name Firmasının Merkezi @Model.City.Name'dedir.</h5>
-                    <p>Açık Adres :@Model.Line</p>
-
+                    <h5>@Model.Name, @Model.City.Name şehrindedir.</h5>
+                    <p>Ayrıntı  :@Model.Line</p>
+                    <img src="@Model.ImageUrl" alt="Image" class="img-fluid" />
+                    <p>Bu mekan @Model.Capacity kişiyi ağırlayabilir.</p>
 
                 </div>
                 <div class="card-footer btn-group">

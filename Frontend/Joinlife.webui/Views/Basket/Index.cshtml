@@ -3,15 +3,15 @@
 @model BasketViewModel
 
 <div class="row">
-    <div class="col-md-8">
-        <div class="offset-md-2">
-            <div class="card">
+    <div class="col-md-8 offset-2">
+        <div class="card">
                 <h5 class="card-title text-center my-3">Sepet</h5>
                 <div class="card-body">
                     @if (Model is not null && Model.BasketItems.Any())
                     {
                         <table class="table-striped table">
                             <thead>
+                            <th></th>
                             <th>Etkinlik Adı</th>
                             <th>Bilet Türü</th>
                             <th>Bilet Fiyatı</th>
@@ -22,14 +22,15 @@
                             <tbody>
                                 @foreach (var item in Model.BasketItems)
                                 {
-                                    <tr>
-                                        <td>@item.EventName</td>
-                                        <td>@item.TicketName</td>
-                                        <td>@item.Price</td>
-                                        <td>@item.Quantity</td>
-                                        <td>@item.CurrentPrice TL</td>
+                                    <tr class="">
+                                        <td><img src="@item.EventImageUrl" class="img-fluid" style="width: 128px; max-height: 128px;" /></td>
+                                        <td class="align-content-center">@item.EventName</td>
+                                        <td class="align-content-center">@item.TicketName</td>
+                                        <td class="align-content-center">@item.Price</td>
+                                        <td class="align-content-center">@item.Quantity</td>
+                                        <td class="align-content-center">@item.CurrentPrice TL</td>
 
-                                        <td><a asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-basketItemId="@item.TicketId">Sil</a></td>
+                                        <td class="align-content-center"><a asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-basketItemId="@item.TicketId">Sil</a></td>
                                     </tr>
                                 }
                                
@@ -49,6 +50,5 @@
                     }
                 </div>
             </div>
-        </div>
     </div>
 </div>

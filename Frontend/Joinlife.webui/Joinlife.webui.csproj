@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Profiles\**" />
+    <Content Remove="Models\Profiles\**" />
+    <EmbeddedResource Remove="Models\Profiles\**" />
+    <None Remove="Models\Profiles\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Home\Error.cshtml" />
   </ItemGroup>
 
@@ -23,7 +30,7 @@
 
   <ItemGroup>
     <Folder Include="Models\Orders\" />
-    <Folder Include="Models\Profiles\" />
+    <Folder Include="ViewModels\Events\" />
   </ItemGroup>
 
   <ItemGroup>

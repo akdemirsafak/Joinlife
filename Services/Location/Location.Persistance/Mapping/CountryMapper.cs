@@ -3,7 +3,7 @@ using Location.Domain.Models.Request.Countries;
 using Location.Domain.Models.Response.Countries;
 using Riok.Mapperly.Abstractions;
 
-namespace Location.Application.Mapping;
+namespace Location.Persistance.Mapping;
 
 [Mapper]
 public partial class CountryMapper
