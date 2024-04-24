@@ -15,11 +15,13 @@ public sealed class UpdateEventInput
     public string Description { get; set; }
     [Required]
     public int EventTypeId { get; set; }
+    public IFormFile Image { get; set; }
+    public string ImageUrl { get; set; }
     public Guid VenueId { get; set; }
     [Required]
     public DateTime StartDateTime { get; set; }
-    [Required] 
+    [Required]
     public DateTime EndDateTime { get; set; }
-    [Required] 
+    [Required]
     public int StatuId { get; set; }
 }

@@ -1,4 +1,4 @@
-using Joinlife.webui.Core.Services;
+﻿using Joinlife.webui.Core.Services;
 using Joinlife.webui.Models.City;
 using Joinlife.webui.Utilities;
 using SharedLib.Dtos;
@@ -24,7 +24,7 @@ public class CityService : ICityService
         var clientResult= await _httpClient.PostAsJsonAsync($"city", input);
         if (!clientResult.IsSuccessStatusCode)
         {
-            throw new Exception("create city failed");
+            throw new Exception("Şehir kaydedilirken bir problem oluştu.");
         }
         var result = await clientResult.Content.ReadFromJsonAsync<GetCityResponse>();
     }
@@ -57,7 +57,7 @@ public class CityService : ICityService
         var clientResult= await _httpClient.PutAsJsonAsync($"city/{input.Id}", input);
         if (!clientResult.IsSuccessStatusCode)
         {
-            throw new Exception("update city failed");
+            throw new Exception("Şehir güncellenirken bir problem oluştu.");
         }
         var result = await clientResult.Content.ReadFromJsonAsync<AppResponse<GetCityResponse>>();
     }

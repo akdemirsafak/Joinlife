@@ -8,20 +8,25 @@
         <div class="col-md-6 offset-3">
             <div class="card">
                 <div class="card-header">
-                    Ürünü güncelle
+                    Ülkeyi Güncelle
                 </div>
                 <div class="card-body">
                     <form method="post" asp-action="Update" enctype="multipart/form-data">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="Id" />
+                        <div class="form-group my-2">
+                            <img src="@Model.ImageUrl" class="" alt="Country Image" />
+                        </div>
                         <div class="form-group">
                             <label asp-for="Name"></label>
                             <input asp-for="Name" class="form-control" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
+
                         <div class="mb-3 form-group">
                             <label asp-for="Image" class="form-label">Görseli seçiniz</label>
-                            <input class="form-control" type="file" id="formFile" value="@Model.ImageUrl" asp-for="Image">
+                            <input class="form-control" type="file" id="formFile" value="@Model.ImageUrl"
+                                asp-for="Image" />
                             <span>@Model.ImageUrl</span>
                         </div>
                         <button class="btn btn-primary" type="submit">Kaydet</button>
@@ -34,7 +39,6 @@
         </div>
     </div>
 </div>
-
 
 @section Scripts
 {

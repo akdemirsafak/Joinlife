@@ -107,6 +107,7 @@ public class EventService : IEventService
         entity.EndDateTime = request.EndDateTime;
         entity.Statu = (EventStatusEnum)request.StatuId;
         entity.Type = (EventTypeEnum)request.EventTypeId;
+        entity.ImageUrl= request.ImageUrl;
         entity.UpdatedAt = DateTime.Now;
 
         await _eventRepository.UpdateAsync(entity);

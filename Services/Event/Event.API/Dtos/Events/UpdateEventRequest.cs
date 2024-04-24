@@ -6,4 +6,5 @@ public record UpdateEventRequest(
     int StatuId,
     DateTime StartDateTime,
     DateTime EndDateTime,
+    string? ImageUrl = null,
     string? Description = null);
