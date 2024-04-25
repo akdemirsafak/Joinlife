@@ -3,8 +3,8 @@
     public enum EventStatusEnum
     {
         Active = 1,
-        Cancelled,
         Postpone,
-        Finished
+        Finished,
+        Cancelled
     }
 }

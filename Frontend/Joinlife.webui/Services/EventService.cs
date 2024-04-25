@@ -18,7 +18,7 @@ public sealed class EventService : IEventService
 
     public async Task CreateAsync(CreateEventInput input)
     {
-        var imageUrl= await _fileService.UploadImageAsync(input.Image,containerName:ContainerNames.Event);
+        var imageUrl = await _fileService.UploadImageAsync(input.Image, containerName: ContainerNames.Event);
         input.ImageUrl = imageUrl;
 
         var clientResult = await _httpClient.PostAsJsonAsync("event", input);
@@ -42,8 +42,9 @@ public sealed class EventService : IEventService
     public async Task<List<GetEventResponse>> GetAllAsync()
     {
         var clientResult = await _httpClient.GetAsync("event");
-        var content = await clientResult.Content.ReadFromJsonAsync<AppResponse<List<GetEventResponse>>>();
-        return content.Data;
+        var content = await clientResult.Content.ReadFromJsonAsync<AppResponse<IEnumerable<GetEventResponse>>>();
+        var data = content.Data.OrderBy(x => x.StatuId).OrderByDescending(x => x.StartDateTime.Ticks).ToList();
+        return data;
     }
 
     public async Task<GetEventByIdResponse> GetAsync(Guid id)
@@ -56,7 +57,7 @@ public sealed class EventService : IEventService
 
     public async Task UpdateAsync(UpdateEventInput input)
     {
-        var imageUrl= await _fileService.UploadImageAsync(input.Image,containerName:ContainerNames.Event);
+        var imageUrl = await _fileService.UploadImageAsync(input.Image, containerName: ContainerNames.Event);
         input.ImageUrl = imageUrl;
         var clientResult = await _httpClient.PutAsJsonAsync($"event/{input.Id}", input);
         if (!clientResult.IsSuccessStatusCode)

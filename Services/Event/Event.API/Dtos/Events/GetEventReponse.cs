@@ -16,6 +16,8 @@ public class GetEventReponse
     public List<EventTickets> Tickets { get; set; }
     public DateTime StartDateTime { get; set; }
     public DateTime EndDateTime { get; set; }
+    public DateTime CreatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; }
 }
 public class EventTickets
 {
