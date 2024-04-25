@@ -36,8 +36,6 @@ namespace Order.Service.Services
                     TicketId=orderItem.TicketId,
                     TicketName=orderItem.TicketName
                 }));
-            //order.TotalPrice= order.OrderItems.Sum(item => item.Price * item.Quantity);
-            // !  order.BuyerId = request.BuyerId; // TODO CurrentUserId
             var created=await _orderRepository.CreateAsync(order);
 
             return AppResponse<CreatedOrderResponse>.Success(order.Adapt<CreatedOrderResponse>(),201);

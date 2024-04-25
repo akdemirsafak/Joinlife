@@ -16,5 +16,6 @@ public partial class CountryMapper
     public partial GetCountryResponse CountryToGetCountryResponse(Country country);
 
     public partial UpdatedCountryResponse CountryToUpdatedCountryResponse(Country country);
+    public partial Country UpdateCountryRequestToCountry(UpdateCountryRequest country);
 
 }

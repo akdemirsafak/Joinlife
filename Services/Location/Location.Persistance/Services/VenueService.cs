@@ -28,15 +28,9 @@ public class VenueService : IVenueService
         var city = await _cityRepository.GetAsync(x => x.Id == request.CityId);
         if (city is null)
             throw new Exception("City not found.");
-        //var entity = venueMapper.CreateVenueInputToVenue(input, city);
-        var entity = new Venue
-        {
-            Name = request.Name,
-            Line = request.Line,
-            ImageUrl = request.ImageUrl,
-            Capacity= request.Capacity,
-            City = city
-        };
+        var entity = venueMapper.CreateVenueRequestToVenue(request);
+        entity.City = city;
+ 
         await _venueRepository.CreateAsync(entity);
         await _unitOfWork.SaveChangesAsync();
         return venueMapper.VenueToCreatedVenueResponse(entity);
@@ -58,7 +52,7 @@ public class VenueService : IVenueService
 
     public async Task<GetVenueByIdResponse> GetByIdAsync(Guid id)
     {
-        Venue venue = await _venueRepository.GetAsync(x => x.Id == id);
+        var venue = await _venueRepository.GetAsync(x => x.Id == id);
         if (venue is null)
             throw new Exception("Venue not found.");
 
@@ -74,11 +68,8 @@ public class VenueService : IVenueService
         if (city is null)
             throw new Exception("City not found.");
 
-        venue.Name = request.Name;
-        venue.Line = request.Line;
-        venue.Capacity = request.Capacity;
+        venue = venueMapper.UpdateVenueRequestToVenue(request);
         venue.City = city;
-        venue.ImageUrl = request.ImageUrl;
 
         await _venueRepository.UpdateAsync(venue);
         await _unitOfWork.SaveChangesAsync();

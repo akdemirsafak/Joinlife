@@ -60,9 +60,8 @@ public sealed class CityService : ICityService
         var country= await _countryRepository.GetAsync(x => x.Id == request.CountryId);
 
         var city= await _cityRepository.GetAsync(x=>x.Id==id);
-        city.Name = request.Name;
-        city.Country = country;
-        city.ImageUrl = request.ImageUrl;
+        city = cityMapper.UpdateCityRequestToCity(request);
+        city.Country= country;
         await _cityRepository.UpdateAsync(city);
         await _unitOfWork.SaveChangesAsync();
         return cityMapper.CityToUpdatedCityResponse(city);

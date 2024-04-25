@@ -20,4 +20,5 @@ public partial class VenueMapper
 
     public partial CreatedVenueResponse VenueToCreatedVenueResponse(Venue venue);
     public partial UpdatedVenueResponse VenueToUpdatedVenueResponse(Venue venue);
+    public partial Venue UpdateVenueRequestToVenue(UpdateVenueRequest request);
 }

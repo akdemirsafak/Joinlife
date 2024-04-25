@@ -13,4 +13,5 @@ public partial class CityMapper
     public partial List<GetCityResponse> CityListToGetCityResponseList(List<City> cities);
     public partial GetCityResponse CityToGetCityResponse(City city);
     public partial UpdatedCityResponse CityToUpdatedCityResponse(City city);
+    public partial City UpdateCityRequestToCity(UpdateCityRequest updateCityRequest);
 }
