@@ -12,6 +12,10 @@
       "UpstreamPathTemplate": "/services/event/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "UpstreamScheme": "https",
+      "FileCacheOptions": {
+        "TtlSeconds": 30,
+        "Region": "events"
+      },
       "AuthenticationOptions": {
         "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
         "AllowedScopes": [ "event_fullpermission" ]
@@ -29,6 +33,10 @@
       "UpstreamPathTemplate": "/services/location/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "UpstreamScheme": "https",
+      "FileCacheOptions": {
+        "TtlSeconds": 30,
+        "Region": "locations"
+      },
       "AuthenticationOptions": {
         "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
         "AllowedScopes": [ "location_fullpermission" ]
@@ -46,6 +54,10 @@
       "UpstreamPathTemplate": "/services/order/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
       "UpstreamScheme": "https",
+      "FileCacheOptions": {
+        "TtlSeconds": 30,
+        "Region": "orders"
+      },
       "AuthenticationOptions": {
         "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
         "AllowedScopes": [ "order_fullpermission" ]
