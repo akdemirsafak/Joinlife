@@ -9,6 +9,7 @@ public sealed class OrderItem
     public string TicketName { get; set; }
     public string EventName { get; set; }
     public decimal Price { get; set; }
+    public string? ImageUrl { get; set; }
 
     public OrderItem()
     {

@@ -48,7 +48,8 @@ public class OrderService : IOrderService
                EventName = x.EventName,
                //PictureUrl = x.PictureUrl,
                TicketId = x.TicketId,
-               TicketName = x.TicketName
+               TicketName = x.TicketName,
+               ImageUrl=x.EventImageUrl
             });
         });
 

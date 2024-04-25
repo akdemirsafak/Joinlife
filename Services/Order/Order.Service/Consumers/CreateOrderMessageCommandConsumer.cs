@@ -32,7 +32,8 @@ public class CreateOrderMessageCommandConsumer : IConsumer<CreateOrderMessageCom
                 Price = x.Price,
                 Quantity = x.Quantity,
                 TicketId = x.TicketId,
-                TicketName = x.TicketName
+                TicketName = x.TicketName,
+                ImageUrl = x.ImageUrl
             }).ToList()
         };
 

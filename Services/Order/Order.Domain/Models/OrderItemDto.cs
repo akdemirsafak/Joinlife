@@ -8,5 +8,6 @@ public class OrderItemDto
     public int Quantity { get; set; }
     public Guid EventId { get; set; }
     public string EventName { get; set; }
-  
+    public string? ImageUrl { get; set; }
+
 }

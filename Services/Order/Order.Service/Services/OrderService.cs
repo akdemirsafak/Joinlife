@@ -34,7 +34,8 @@ namespace Order.Service.Services
                     Quantity=orderItem.Quantity,
                     Price=orderItem.Price,
                     TicketId=orderItem.TicketId,
-                    TicketName=orderItem.TicketName
+                    TicketName=orderItem.TicketName,
+                    ImageUrl=orderItem.ImageUrl
                 }));
             var created=await _orderRepository.CreateAsync(order);
 

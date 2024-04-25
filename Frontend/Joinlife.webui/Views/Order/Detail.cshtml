@@ -5,30 +5,38 @@
 
 
 <div class="row">
-
     <div class="col-md-8 offset-2">
         <div class="card">
-            <div class="card-title h5">@Model.Id nolu Siparişin ayrıntıları :</div>
-        <div class="card-body">
-               <div class="card-subtitle m-3">
-                   Sipariş Tarihi : @Model.CreatedAt tarihinde oluşturuldu.
-                   Sipariş Tutarı : @Model.TotalPrice TL
-                   Sipariş : @Model.OrderItems.Count adet ürün içeriyor.
-                   </div>
-                   <div class="card-body">
-                   <ul>
-                        @foreach (var item in Model.OrderItems)
-                        {
-                            <li>
-                              Etkinlik Id :@item.EventId - Etkinlik  Adı : @item.EventName - BiletId: @item.TicketId - Bilet Türü :  @item.TicketName - Fiyat :  @item.Price - Adet : @item.Quantity
-                            </li>
-                        }
-
-                   </ul>
-                         
-               </div>
-        </div>
-
+             <h4 class="text-center my-3"> Sipariş Detayları: </h4>
+             <table class="table table-striped">
+                <thead>
+                        <tr>
+                            @*<th scope="col">Etkinlik Id</th>*@
+                            <th>Resim</th>
+                            <th scope="col">Etkinlik Adı</th>
+                            @*<th scope="col">Bilet Id</th>*@
+                            <th scope="col">Bilet Türü</th>
+                            <th scope="col">Fiyat</th>
+                            <th scope="col">Adet</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderItems)
+                    {
+                        <tr>
+                            @*<td>@item.EventId</td>*@
+                            <td class="align-content-center"><img src="@item.ImageUrl" class="img-fluid" style="width: 128px; max-height: 128px;" /></td>
+                            <td class="align-content-center">@item.EventName</td>
+                            @*<td>@item.TicketId</td>*@
+                            <td class="align-content-center">@item.TicketName</td>
+                            <td class="align-content-center">@item.Price</td>
+                            <td class="align-content-center">@item.Quantity</td>
+                            <td class="align-content-center"><a asp-action="GetById" asp-controller="Invitation" asp-route-id="@item.Id">Bileti görüntüle</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
         </div>
      </div>
 

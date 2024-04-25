@@ -19,6 +19,7 @@
                     @foreach (var item in ViewBag.Basket.BasketItems as List<BasketItemViewModel>)
                     {
                         <tr>
+                        <td><img src="@item.EventImageUrl" class="img-fluid" style="width: 128px; max-height: 128px;" /></td>
                             <td>@item.EventName</td>
                             <td>@item.TicketName</td>
                             <td>@item.Quantity</td>
