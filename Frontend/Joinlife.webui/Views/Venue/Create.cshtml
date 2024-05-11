@@ -4,16 +4,22 @@
 @model CreateVenueInput
 
 <div class="container">
-    <h3 class="text-center">Yeni Organizatör</h3>
+    <h3 class="text-center">Yeni Mekan</h3>
     <div class="row">
         <div class="col-md-6 offset-3">
-            <form method="post" asp-action="Create">
+            <form method="post" asp-action="Create" enctype="multipart/form-data">
                 <div class="form-group mb-2">
-                    <label asp-for="Name"></label>
+                    <label asp-for="Name">İsim</label>
                     <input asp-for="Name" type="text" class="form-control" />
+                    <span asp-validation-for="Name" class="danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="Capacity"> Kapasite </label>
+                    <input asp-for="Capacity" type="text" class="form-control" />
+                    <span asp-validation-for="Capacity" class="danger"></span>
                 </div>
                 <div class="mb-3 form-group">
-                    <select asp-for="CityId" asp-items="ViewBag.Cities" class="form-control">
+                    <select asp-for="CityId" asp-items="ViewBag.Cities" class=" form-control">
                         <option value="">Şehir seçiniz</option>
                     </select>
                     <span asp-validation-for="CityId" class="danger"></span>
@@ -21,6 +27,12 @@
                 <div class="form-group mb-2">
                     <label asp-for="Line"></label>
                     <textarea asp-for="Line" type="text" class="form-control"></textarea>
+                    <span asp-validation-for="Line" class="danger"></span>
+                </div>
+                <div class="mb-3 form-group">
+                    <label asp-for="Image" class="form-label">Görseli seçiniz</label>
+                    <input class="form-control" type="file" id="formFile" asp-for="Image">
+                    <span asp-validation-for="Image" class="danger"></span>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Kaydet</button>
@@ -29,3 +41,8 @@
         </div>
         <div>
         </div>
+
+        @section Scripts
+        {
+            <partial name="_ValidationScriptsPartial" />
+        }

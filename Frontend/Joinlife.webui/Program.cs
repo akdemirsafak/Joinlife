@@ -1,33 +1,44 @@
-using Joinlife.webui.Contexts;
-using Joinlife.webui.Core;
-using Joinlife.webui.Core.Repositories;
-using Joinlife.webui.Core.Services;
-using Joinlife.webui.Entities;
-using Joinlife.webui.Repositories;
-using Joinlife.webui.Services;
-using Joinlife.webui.UnitOfWorks;
-using Microsoft.EntityFrameworkCore;
+﻿using Joinlife.webui.Extensions;
+using Joinlife.webui.Handlers;
+using Joinlife.webui.Settings;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using SharedLib.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+
+//builder.Services.AddMvc().AddViewOptions(options =>
+//{
+//    options.HtmlHelperOptions.ClientValidationEnabled = true;
+//});
+
+builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
+builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddAccessTokenManagement();
+builder.Services.AddScoped<IIdentitySharedService, IdentitySharedService>();
+
+
+builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClientServices(builder.Configuration);
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
+    {
+        opt.LoginPath = "/Auth/SignIn";
+        opt.ExpireTimeSpan = TimeSpan.FromDays(60); 
+        opt.SlidingExpiration = true; 
+        opt.Cookie.Name = "webCookie";
+    }); 
+
+
 builder.Services.AddControllersWithViews();
-
-builder.Services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-builder.Services.AddScoped<ICountryService, CountryService>();
-builder.Services.AddScoped<ICityService, CityService>();
-builder.Services.AddScoped<IOrganizerService, OrganizerService>();
-builder.Services.AddScoped<IVenueService, VenueService>();
-builder.Services.AddScoped<IEventService, EventService>();
 
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -39,6 +50,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

@@ -1,64 +1,74 @@
-using Joinlife.webui.Core;
-using Joinlife.webui.Core.Repositories;
-using Joinlife.webui.Core.Services;
-using Joinlife.webui.Entities;
-using Joinlife.webui.Mapping;
+﻿using Joinlife.webui.Core.Services;
 using Joinlife.webui.Models.Country;
+using Joinlife.webui.Utilities;
+using SharedLib.Dtos;
 
-namespace Joinlife.webui.Services
+namespace Joinlife.webui.Services;
+
+public class CountryService : ICountryService
 {
-    public class CountryService : ICountryService
+    private readonly HttpClient _httpClient;
+    private readonly IFileService _fileService;
+    //Service Requests
+    public CountryService(HttpClient httpClient, IFileService fileService)
     {
-        private readonly IRepository<Country> _repository;
-        private readonly IUnitOfWork _unitOfWork;
-        CountryMapper countryMapper = new CountryMapper();
+        _httpClient = httpClient;
+        _fileService = fileService;
+    }
 
-        public CountryService(IRepository<Country> repository,
-        IUnitOfWork unitOfWork)
+    public async Task CreateAsync(CreateCountryInput input)
+    {
+        var imageUrl= await _fileService.UploadImageAsync(input.Image, containerName:ContainerNames.Country);
+        input.ImageUrl = imageUrl;
+        var clientResult= await _httpClient.PostAsJsonAsync("country",input);
+        if (!clientResult.IsSuccessStatusCode)
         {
-            _repository = repository;
-            _unitOfWork = unitOfWork;
+            throw new Exception("Ülkeyi kaydederken bir problem oluştu.");
+        }
+        //var responseContent = await clientResult.Content.ReadFromJsonAsync<AppResponse<CountryViewModel>>();
+    }
+
+    public async Task DeleteAsync(Guid id)
+    {
+        //Country'de delete yok.
+        //var clientResult = await _httpClient.DeleteAsync($"country/{id}"); 
+        // if (!clientResult.IsSuccessStatusCode)
+        // {
+        //     throw new Exception("delete country failed");
+        // }
+    }
+
+    public async Task<List<CountryViewModel>> GetAllAsync()
+    {
+        var response = await _httpClient.GetAsync("country");
+        if (!response.IsSuccessStatusCode)
+        {
+            return new List<CountryViewModel>();
         }
 
-        public async Task CreateAsync(CreateCountryInput input)
-        {
-            var isExistCountry = await _repository.GetAsync(x => x.Name == input.Name);
-            var entity = countryMapper.CreateCountryInputToCountry(input);
-            await _repository.CreateAsync(entity);
-            await _unitOfWork.CommitAsync();
-        }
+        var countryResponse = await response.Content.ReadFromJsonAsync<AppResponse<List<CountryViewModel>>>();
+        //ReadString ile data geliyor. maplemede sıkıntı var büyük ihtimalle
+        return countryResponse.Data;
+    }
 
-        public async Task DeleteAsync(Guid id)
-        {
-            var country = await _repository.GetAsync(x => x.Id == id);
-            if (country is null)
-            {
-                throw new Exception("Country not found");
-            }
-            await _repository.DeleteAsync(country);
-            await _unitOfWork.CommitAsync();
+    public async Task<GetCountryByIdResponse> GetByIdAsync(Guid id)
+    {
+        var clientResult = await _httpClient.GetAsync($"country/{id}");
+        var responseContent= await clientResult.Content.ReadFromJsonAsync<AppResponse<GetCountryByIdResponse>>();
+        return responseContent.Data;
+    }
 
-        }
+    public async Task UpdateAsync(UpdateCountryInput input)
+    {
+        var imageUrl= await _fileService.UploadImageAsync(input.Image,containerName:ContainerNames.Country);
+        input.ImageUrl = imageUrl;
 
-        public async Task<List<GetCountryResponse>> GetAllAsync()
+        var clientResult = await _httpClient.PutAsJsonAsync($"country/{input.Id}", input);
+        if (!clientResult.IsSuccessStatusCode)
         {
-            var countries = await _repository.GetAllAsync();
-            return countryMapper.CountryListToGetCountryListResponse(countries);
+            throw new Exception("Ülke bilgileri güncellenemedi.");
         }
+        //var requestContent = await clientResult.Content.ReadFromJsonAsync<AppResponse<GetCountryResponse>>();
 
-        public async Task<GetCountryByIdResponse> GetAsync(Guid id)
-        {
-            var country = await _repository.GetAsync(x => x.Id == id);
-            if (country is null)
-                throw new Exception("Country not found");
-            return countryMapper.CountryToGetCountryByIdResponse(country);
-        }
-
-        public async Task UpdateAsync(UpdateCountryInput input)
-        {
-            var entity = countryMapper.UpdateCountryInputToCountry(input);
-            await _repository.UpdateAsync(entity);
-            await _unitOfWork.CommitAsync();
-        }
     }
 }

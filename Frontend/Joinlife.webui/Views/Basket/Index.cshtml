@@ -1,0 +1,54 @@
+﻿@{
+}
+@model BasketViewModel
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card">
+                <h5 class="card-title text-center my-3">Sepet</h5>
+                <div class="card-body">
+                    @if (Model is not null && Model.BasketItems.Any())
+                    {
+                        <table class="table-striped table">
+                            <thead>
+                            <th></th>
+                            <th>Etkinlik Adı</th>
+                            <th>Bilet Türü</th>
+                            <th>Bilet Fiyatı</th>
+                            <th>Adet </th>
+                            <th>Toplam Tutar : </th>
+                            <th>İşlemler</th>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.BasketItems)
+                                {
+                                    <tr class="">
+                                        <td><img src="@item.EventImageUrl" class="img-fluid" style="width: 128px; max-height: 128px;" /></td>
+                                        <td class="align-content-center">@item.EventName</td>
+                                        <td class="align-content-center">@item.TicketName</td>
+                                        <td class="align-content-center">@item.Price</td>
+                                        <td class="align-content-center">@item.Quantity</td>
+                                        <td class="align-content-center">@item.CurrentPrice TL</td>
+
+                                        <td class="align-content-center"><a asp-controller="Basket" asp-action="RemoveBasketItem" asp-route-basketItemId="@item.TicketId">Sil</a></td>
+                                    </tr>
+                                }
+                               
+                            </tbody>
+                        </table>
+                        <div class="d-flex my-3 justify-content-end">
+                            <h6 class="text-dark">Toplam Tutar: @Model.TotalPrice TL</h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                        <a class="btn btn-success" asp-controller="Order" asp-action="Checkout">Ödeme bilgileri</a>
+                        <a class="btn btn-warning" asp-controller="Home" asp-action="Index">Etkinlikleri incelemeye devam et.</a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info">Sepet boş.</div>
+                    }
+                </div>
+            </div>
+    </div>
+</div>

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using Joinlife.webui.Entities;
+﻿using Joinlife.webui.Models.Tickets;
+using System.ComponentModel;
 
 namespace Joinlife.webui.Models.EventDtos
 {
@@ -12,9 +12,15 @@ namespace Joinlife.webui.Models.EventDtos
         public string? Description { get; set; }
         public string EventType { get; set; }
         public int EventTypeId { get; set; }
-        public Organizer Organizer { get; set; } //Event'i düzenleyen firma
-        public Venue Venue { get; set; } //Nerede
+        public string? ImageUrl { get; set; }
+        public Guid VenueId { get; set; } //Nerede
+        public int StatuId { get; set; } = 1;
+        public string Statu { get; set; }
+        public List<TicketViewModel> Tickets { get; set; }
+        public DateTime StartDateTime { get; set; }
+        public DateTime EndDateTime { get; set; }
         public DateTime? CreatedAt { get; set; }
         public DateTime? LastModifiedAt { get; set; }
+        public string Duration => (EndDateTime - StartDateTime).ToString(@"hh\:mm");
     }
 }

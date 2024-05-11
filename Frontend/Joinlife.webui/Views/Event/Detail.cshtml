@@ -5,17 +5,40 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6 offset-3">
+        <div class="col-md-8 offset-2">
             <div class="card">
-                <div class="card-header h5 text-center">
-                    @Model.Name etkinliği bir @Model.EventType 'dır ve @Model.Organizer.Name tarafından düzenlenir.
-                </div>
+                <div class="card-header text-center bg-white">
+                    <img src="@Model.ImageUrl" class="card-img" alt="@Model.Name" style="object-fit:cover;object-position: 50% 20%;max-height:512px;" />
+               </div>
                 <div class="card-body">
-                    <p>Event ayrıntıları : @Model.Description</p>
-                    <p>Konum : @Model.Venue.Name , @Model.Venue.City.Name</p>
+                    <h2 class="text-center"> @Model.Name</h2>
+                    <h5 class="text-opacity-75">Ayrıntılar :</h5>
+                   
+                   
+                    <div class="">
+                        <span class="material-symbols-outlined text-danger">distance</span> 
+                        <span> Konum : @ViewBag.Venue.Name, @ViewBag.Venue.City.Name</span>
+                    </div>
+                    <p>
+                        Tarih : @Model.StartDateTime.ToString("dd/MM/yyyy") Saat : @Model.StartDateTime.ToShortTimeString()
+
+                    </p>
+                    <p class="text-opacity-75">@Model.Description</p>
+
+                        @foreach(var ticket in Model.Tickets)
+                        {
+
+                        <div class="justify-content-between text-end mt-2">
+                                <span class="">@ticket.Name Bilet</span>  
+                                <span class="">@ticket.Price TL</span>
+                            <a asp-controller="Basket" asp-action="AddBasketItem" asp-route-ticketId="@ticket.Id"> Sepete ekle</a>
+                            <hr  class="mb-2"/>
+                        </div>
+                        }
                 </div>
 
-                <div class="card-footer btn-group">
+                <div class="card-footer btn-group d-flex">
+                        <a asp-controller="Ticket" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-outline-primary">Bilet tanımla</a>
                     <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-warning">Güncelle</a>
                     <form method="post">
                         <button asp-action="Delete" asp-route-id="@Model.Id" type="submit"

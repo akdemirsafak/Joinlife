@@ -1,0 +1,157 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/services/event/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamScheme": "https",
+      "FileCacheOptions": {
+        "TtlSeconds": 30,
+        "Region": "events"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "event_fullpermission" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/services/location/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamScheme": "https",
+      "FileCacheOptions": {
+        "TtlSeconds": 30,
+        "Region": "locations"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "location_fullpermission" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/services/order/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamScheme": "https",
+      "FileCacheOptions": {
+        "TtlSeconds": 30,
+        "Region": "orders"
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "order_fullpermission" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7004
+        }
+      ],
+      "UpstreamPathTemplate": "/services/ticket/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "ticket_fullpermission" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/services/file/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "fileapi_fullpermission" ]
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/services/basket/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "basket_fullpermission" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/services/payment/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "payment_fullpermission" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/services/notification/{everything}",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+      "UpstreamScheme": "https",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey ": "GatewayAuthenticationScheme",
+        "AllowedScopes": [ "notification_fullpermission" ]
+      }
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000"
+  }
+}

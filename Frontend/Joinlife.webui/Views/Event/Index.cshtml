@@ -5,32 +5,85 @@
 
 @model List<GetEventResponse>
 
-<div class="row">
-    <div class="col-md-12">
-        <div>
-            <a asp-action="Create" class="btn btn-primary">Create New</a>
-        </div>
-        @if (!Model.Any())
-        {
-            <div class="jumbotron text-center">No organization found.</div>
-        }
-        else
-        {
-            @foreach (var organization in Model)
-            {
-                <div class="card m-2">
-                    <div class="card-header">
-                        <h4 class="card-title">
-                            <a asp-action="Detail" asp-route-id="@organization.Id">
-                                @organization.Name</a>
-                            <h6>Event Türü @organization.EventType</h6>
-                            <h6>Organizasyon Firması @organization.Organizer.Name</h6>
-                            <h6>Yer @organization.Venue.Name</h6>
-                            <p>Açıklama : @organization.Description</p>
-                        </h4>
-                    </div>
-                </div>
-            }
-        }
-    </div>
+<style>
+    .hover-card {
+        transition: transform .2s;
+        /* Animation */
+    }
+
+    .hover-card:hover {
+        transform: scale(1.02);
+        /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+        background-color: ghostwhite;
+    }
+
+    .disabled {
+        pointer-events: none;
+        opacity: 0.5;
+        text-decoration: none;
+        cursor: not-allowed;
+    }
+</style>
+
+
+
+
+<div class="my-1 mx-0 align-content-end align-self-end justify-content-end d-flex">
+    <a asp-action="Create" class="btn btn-lg btn-primary m-0 px-4">Ekle</a>
 </div>
+@if (!Model.Any())
+{
+    <div class="jumbotron text-center">Yakın tarihlerde etkinlik yok.</div>
+}
+else
+{
+
+    @foreach (var organization in Model)
+    {
+        <a asp-action="Detail" asp-route-id="@organization.Id" class="card my-2 hover-card text-decoration-none text-dark @(organization.EndDateTime <= DateTime.Now? "disabled" : organization.Statu == "Cancelled"? "disabled" : "")"
+
+                >
+                    <div class=" row d-flex">
+            <div class="col-3">
+                <img src="@organization.ImageUrl" class="img-fluid" style="object-fit:cover;max-height:256px;width:256px;" />
+            </div>
+            <div class="col-6 py-3">
+
+                <h3 class="card-title">@organization.Name (@organization.EventType)</h3>
+                <h5 class="mb-3 justify-content-start align-self-end align-content-end d-flex">
+        @foreach (var venue in ViewBag.Venues)
+        {
+        if (venue.Id == organization.VenueId)
+        {
+                    <span>@venue.Name, @venue.City.Name</span>
+        }
+        }
+                    <span class="material-symbols-outlined text-danger">distance</span>
+                </h5>
+                
+                <p class="card-text">@organization.Description</p>
+            </div>
+            <div class="col-3 py-3">
+                <h5 class="text-end me-3">@organization.StartDateTime.ToString("dd.MM.yyyy") 
+                @organization.StartDateTime.ToShortTimeString()</h5>
+                @if (organization.Statu == "Cancelled")
+                {
+                        <p class="d-inline-block px-3 py-1 text-light rounded-3 bg-danger float-end me-2">İptal Edildi</p>
+                }
+                else if (organization.EndDateTime <= DateTime.Now)
+                {
+                        <p class="d-inline-block px-3 py-1 text-light rounded-3 bg-success float-end me-2">Tamamlandı</p>
+                }
+                else if (organization.Statu == "Postpone")
+                {
+                        <p class="d-inline-block px-3 py-1 text-light rounded-3 bg-warning float-end me-2">Ertelendi</p>
+                }
+            
+
+
+            </div>
+            </div>
+        </a>
+        }
+
+        }
